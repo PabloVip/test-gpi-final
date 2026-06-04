@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Test GPI · Temas 06 y 07 + Examen 2º Parcial</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#1c2430; --muted:#6b7686; --line:#e7e3da; --paper:#f6f3ec; --card:#fffdf8;
+    --blue:#2f6fb0; --blue-d:#15314f; --blue-bg:#eef5fc;
+    --green:#1f7a5a; --green-d:#0f3d2e; --green-bg:#eef7f2;
+    --violet:#6b3fa0; --violet-d:#3f2566; --violet-bg:#f3ecfa;
+    --good:#2f8a4e; --good-bg:#e6f5ec; --bad:#c0392b; --bad-bg:#fbe9e7; --warn:#b07d00; --warn-bg:#fff6e0;
+    --shadow:0 1px 2px rgba(20,30,40,.04),0 8px 24px rgba(20,30,40,.06);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:'Albert Sans',system-ui,sans-serif;line-height:1.5;
+    background-image:radial-gradient(circle at 1px 1px,rgba(0,0,0,.025) 1px,transparent 0);background-size:22px 22px;}
+  .wrap{max-width:860px;margin:0 auto;padding:0 18px 80px;}
+  header{padding:38px 0 18px;text-align:center;}
+  header .eyebrow{font-size:12px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:600;}
+  header h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(28px,6vw,44px);line-height:1.05;margin:8px 0 6px;}
+  header p{margin:0;color:var(--muted);font-size:15px;}
+
+  .score{position:sticky;top:10px;z-index:20;background:var(--card);border:1px solid var(--line);border-radius:16px;
+    box-shadow:var(--shadow);padding:14px 18px;margin:18px 0 8px;display:flex;align-items:center;gap:18px;flex-wrap:wrap;}
+  .score .big{font-family:'Fraunces',serif;font-weight:900;font-size:30px;line-height:1;}
+  .score .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;}
+  .score .stat{display:flex;flex-direction:column;gap:2px;}
+  .bar{flex:1;min-width:120px;height:10px;border-radius:99px;background:#eceae2;overflow:hidden;}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--violet));transition:width .5s cubic-bezier(.2,.8,.2,1);}
+  .reset{margin-left:auto;border:1px solid var(--line);background:#fff;color:var(--muted);font-weight:600;font-size:13px;
+    padding:8px 14px;border-radius:99px;cursor:pointer;transition:.2s;font-family:inherit;}
+  .reset:hover{border-color:var(--bad);color:var(--bad);}
+
+  .filters{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 8px;}
+  .chip{border:1px solid var(--line);background:#fff;color:var(--muted);font-weight:600;font-size:13px;padding:8px 16px;
+    border-radius:99px;cursor:pointer;transition:.2s;font-family:inherit;}
+  .chip:hover{transform:translateY(-1px);}
+  .chip[aria-pressed="true"]{color:#fff;border-color:transparent;}
+  .chip.all[aria-pressed="true"]{background:var(--ink);}
+  .chip.t6[aria-pressed="true"]{background:var(--blue);}
+  .chip.t7[aria-pressed="true"]{background:var(--green);}
+  .chip.ex[aria-pressed="true"]{background:var(--violet);}
+
+  .tema-h{font-family:'Fraunces',serif;font-weight:900;font-size:24px;margin:34px 0 4px;padding-left:14px;border-left:6px solid;}
+  .tema-h.t6{border-color:var(--blue);color:var(--blue-d);}
+  .tema-h.t7{border-color:var(--green);color:var(--green-d);}
+  .tema-h.ex{border-color:var(--violet);color:var(--violet-d);}
+  .tema-note{font-family:'Albert Sans',sans-serif;font-size:13px;color:var(--muted);margin:6px 0 0;padding-left:14px;}
+  .unit-h{font-weight:700;font-size:15px;letter-spacing:.3px;margin:26px 0 10px;display:flex;align-items:center;gap:10px;}
+  .unit-h .u{font-size:11px;font-weight:700;color:#fff;padding:3px 9px;border-radius:99px;letter-spacing:.5px;}
+  .unit-h.t6 .u{background:var(--blue);}
+  .unit-h.t7 .u{background:var(--green);}
+  .unit-h.ex .u{background:var(--violet);}
+
+  .q{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px 18px 6px;margin:12px 0;}
+  .q .num{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.5px;}
+  .q .prompt{font-size:16.5px;font-weight:600;margin:4px 0 12px;}
+  .opts{display:flex;flex-direction:column;gap:8px;}
+  .opt{display:flex;gap:10px;align-items:flex-start;text-align:left;border:1.5px solid var(--line);background:#fff;border-radius:12px;
+    padding:11px 13px;cursor:pointer;font-family:inherit;font-size:15px;color:var(--ink);transition:.16s;width:100%;}
+  .opt:hover:not(:disabled){border-color:var(--blue);background:var(--blue-bg);transform:translateY(-1px);}
+  .t7scope .opt:hover:not(:disabled){border-color:var(--green);background:var(--green-bg);}
+  .exscope .opt:hover:not(:disabled){border-color:var(--violet);background:var(--violet-bg);}
+  .opt:disabled{cursor:default;}
+  .opt .key{flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-weight:700;font-size:13px;
+    background:#f0ede4;color:var(--muted);transition:.16s;}
+  .opt.correct{border-color:var(--good);background:var(--good-bg);} .opt.correct .key{background:var(--good);color:#fff;}
+  .opt.wrong{border-color:var(--bad);background:var(--bad-bg);} .opt.wrong .key{background:var(--bad);color:#fff;}
+  .opt.pick{border-color:var(--warn);background:var(--warn-bg);} .opt.pick .key{background:var(--warn);color:#fff;}
+  .opt.dim{opacity:.55;}
+  .exp{font-size:14px;color:#3a4654;background:#faf7f0;border-left:4px solid var(--line);border-radius:8px;
+    padding:10px 12px;margin:10px 0 12px;display:none;}
+  .exp.show{display:block;animation:fade .35s ease;}
+  .exp b{color:var(--ink);}
+  .exp .verdict{font-weight:700;} .verdict.ok{color:var(--good);} .verdict.no{color:var(--bad);} .verdict.rev{color:var(--warn);}
+  .exp .flag{display:block;margin-top:7px;padding-top:7px;border-top:1px dashed #e0d8c5;color:var(--warn);font-weight:500;}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  .hidden{display:none !important;}
+  footer{text-align:center;color:var(--muted);font-size:12.5px;margin-top:40px;}
+  .done-banner{background:linear-gradient(120deg,var(--blue),var(--violet));color:#fff;border-radius:16px;padding:18px;text-align:center;
+    font-weight:600;margin:18px 0;display:none;box-shadow:var(--shadow);}
+  .done-banner.show{display:block;animation:fade .4s ease;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Gestión de Proyectos Informáticos</div>
+    <h1>Test de repaso</h1>
+    <p>Temas 06 y 07 · Examen 2º Parcial (respuestas verificadas) · corrección instantánea</p>
+  </header>
+
+  <div class="score">
+    <div class="stat"><span class="big" id="pct">0%</span><span class="lbl">Acierto</span></div>
+    <div class="stat"><span class="big" id="hits">0</span><span class="lbl">Aciertos</span></div>
+    <div class="stat"><span class="big" id="ans">0<span style="font-size:16px;color:var(--muted)">/0</span></span><span class="lbl">Contestadas</span></div>
+    <div class="bar"><i id="barfill"></i></div>
+    <button class="reset" id="resetBtn">↺ Reiniciar</button>
+  </div>
+
+  <div class="filters" id="filters">
+    <button class="chip all" data-f="all" aria-pressed="true">Todo</button>
+    <button class="chip t6"  data-f="6"   aria-pressed="false">Tema 06</button>
+    <button class="chip t7"  data-f="7"   aria-pressed="false">Tema 07</button>
+    <button class="chip ex"  data-f="EX"  aria-pressed="false">★ Examen 2º Parcial</button>
+  </div>
+
+  <div class="done-banner" id="doneBanner"></div>
+  <div id="quiz"></div>
+  <footer>Test de estudio · preguntas de repaso (Temas 06 y 07) y examen oficial del 2º parcial con respuestas verificadas.<br>Las respuestas se guardan solo en esta sesión. Las preguntas marcadas con ⚠ conviene contrastarlas.</footer>
+</div>
+
+<script>
+const UNITS = {
+  6:{cls:"t6",title:"Tema 06 · Programación de Proyectos",order:["U1","U2","U3","U4","U5","U6","U7"],
+     names:{U1:"Planificación y programación",U2:"Método PERT",U3:"Diagramas de Gantt",U4:"Herramientas",U5:"Asignación de recursos",U6:"Nivelación de recursos",U7:"Resultados de la programación"}},
+  7:{cls:"t7",title:"Tema 07 · Control del Proyecto",order:["U1","U2","U3","U4","U5","U6","U7","U8"],
+     names:{U1:"Control del proyecto",U2:"Control de tiempos",U3:"Control de costes",U4:"Método del valor ganado (EVM)",U5:"Informes de seguimiento",U6:"Acciones correctivas y crisis",U7:"Gestión de riesgos",U8:"Metodología de la gestión de riesgos"}},
+  EX:{cls:"ex",title:"Examen 2º Parcial (oficial)",note:"Preguntas reales del 2º parcial con las respuestas resueltas y verificadas. Las marcadas con ⚠ están truncadas en el original o parecen tener errata: conviene contrastarlas con el profesor.",
+     order:["EX1"],names:{EX1:"Preguntas 1 – 72"}}
+};
+
+const Q = [
+/* ===== TEMA 06 ===== */
+{t:6,u:"U1",q:"¿Qué relación establece el tema entre planificación y programación?",opts:["Son sinónimos","La programación es el todo y la planificación el núcleo","La planificación es el todo y la programación es el núcleo","Son procesos totalmente independientes"],c:2,e:"«La planificación es el todo y la programación sería el núcleo del proyecto.»"},
+{t:6,u:"U1",q:"La pregunta «¿cuándo lo hago?» corresponde a…",opts:["Planificar","Programar","Presupuestar","Documentar"],c:1,e:"Planificar = ¿qué hago?; programar = ¿cuándo lo hago?"},
+{t:6,u:"U1",q:"¿Cuál NO es una entrada (dato necesario) para programar?",opts:["Lista de actividades y sus características","Diagrama de red del proyecto","Estimación de duración de actividades","El informe postmortem del proyecto"],c:3,e:"Las entradas son: lista de actividades, red, duraciones, recursos, calendarios y limitaciones."},
+{t:6,u:"U1",q:"Ordenar las tareas estableciendo secuencia, prioridades y dependencias es la etapa de…",opts:["Análisis de objetivos","Organización de las tareas","Presupuesto","Asignación de recursos"],c:1,e:"Es el paso 3 (organización), núcleo de este tema."},
+{t:6,u:"U2",q:"La fórmula de la duración esperada en PERT es:",opts:["(a+m+b)/3","(a+4m+b)/6","(a+2m+b)/4","(2a+m+2b)/5"],c:1,e:"Distribución beta: te = (a + 4m + b) / 6."},
+{t:6,u:"U2",q:"Una actividad tiene a=2, m=5, b=14. Su duración esperada es:",opts:["5","6","7","5,5"],c:1,e:"(2 + 4·5 + 14)/6 = 36/6 = 6."},
+{t:6,u:"U2",q:"El ES (comienzo más temprano) de un evento se calcula…",opts:["mín[ESi+Tij] recorriendo hacia atrás","máx[ESi+Tij] recorriendo de izquierda a derecha","máx[LSj−Tij]","como LSi − ESi"],c:1,e:"ESj = máx[ESi + Tij], hacia delante, partiendo de ES inicial = 0."},
+{t:6,u:"U2",q:"Las actividades del camino crítico se caracterizan por tener…",opts:["Holgura máxima","Holgura total = 0","Holgura libre siempre negativa","Duración 0"],c:1,e:"Holgura 0 (condición necesaria, no suficiente). Puede haber más de un camino crítico."},
+{t:6,u:"U2",q:"La relación correcta entre los tipos de holgura de una actividad es:",opts:["HT ≤ HL ≤ HI","HI ≤ HL ≤ HT","HL ≤ HI ≤ HT","Las tres son siempre iguales"],c:1,e:"HI ≤ HL ≤ HT; la holgura independiente puede ser negativa."},
+{t:6,u:"U2",q:"Una actividad ficticia (dummy) en PERT…",opts:["Tiene la duración media de las demás","Tiene duración 0 y refleja dependencias o cierra la red","Consume el doble de recursos","Siempre es crítica"],c:1,e:"Duración 0; sirve para dependencias o cerrar la red con un único nodo final."},
+{t:6,u:"U2",q:"La holgura total de una actividad HT[Aij] se calcula como:",opts:["LSj − (ESi + Tij)","ESj − (ESi + Tij)","ESj − (LSi + Tij)","LSi − ESi"],c:0,e:"HT = LSj − (ESi+Tij). La libre usa ESj; la independiente usa LSi."},
+{t:6,u:"U3",q:"El diagrama de Gantt fue inventado por…",opts:["Henry Ford","Charles Gantt, en 1917","Tom DeMarco","Edward Tufte"],c:1,e:"Charles Gantt (1917). Incluido en Métrica 3 y PMBOK."},
+{t:6,u:"U3",q:"En su versión básica, el diagrama de Gantt…",opts:["Muestra el camino crítico","No muestra las dependencias entre actividades","Calcula las holguras automáticamente","Sustituye al método PERT"],c:1,e:"El Gantt básico muestra actividades y duración, pero no las dependencias."},
+{t:6,u:"U3",q:"Un hito en un diagrama de Gantt es…",opts:["La tarea de mayor duración","Una actividad que no supone trabajo ni consume recursos, y es verificable","La actividad que consume todos los recursos críticos","Sinónimo de retraso"],c:1,e:"Hito = evento verificable, sin trabajo ni consumo de recursos."},
+{t:6,u:"U3",q:"¿Cuál es una desventaja del diagrama de Gantt?",opts:["Es difícil de entender","Tiende a desactualizarse rápidamente","Es más caro que el PERT","No muestra fechas de inicio y fin"],c:1,e:"Se desactualiza rápido, no prevé conflictos ni permite evaluar alternativas."},
+{t:6,u:"U4",q:"¿Cuál es una herramienta de gestión de proyectos citada en el tema?",opts:["Photoshop","Microsoft Project","AutoCAD","MATLAB"],c:1,e:"MS Project, ProjectLibre, Primavera, Redmine, Jira, Trello, Asana…"},
+{t:6,u:"U4",q:"Trello se describe como…",opts:["Un ERP","Una herramienta visual ágil (tablero kanban)","Un sistema de control de versiones","Un gestor documental"],c:1,e:"Trello = herramienta visual ágil tipo tablero kanban."},
+{t:6,u:"U4",q:"Un sistema ERP se emplea para…",opts:["Pequeños proyectos personales","La gestión empresarial a gran escala","Solo control de versiones","Solo diseño gráfico"],c:1,e:"ERP = software de gestión empresarial a gran escala."},
+{t:6,u:"U5",q:"La herramienta para conocer las habilidades de los recursos es…",opts:["La curva de la S","La matriz de habilidades","El histograma de recursos","El diagrama de red"],c:1,e:"Matriz persona × habilidad para asignar roles."},
+{t:6,u:"U5",q:"Al introducir limitaciones de recursos puede aparecer…",opts:["El camino crítico","La cadena crítica","Una actividad ficticia","Un hito"],c:1,e:"La cadena crítica puede convertir en críticas tareas que no lo eran."},
+{t:6,u:"U5",q:"¿Cómo conviene equilibrar dificultad de tarea y experiencia del recurso?",opts:["Tareas complejas a recursos sin experiencia","Tareas sencillas a recursos muy experimentados","Tareas complejas a recursos experimentados","Es indiferente"],c:2,e:"Complejas → experimentados; sencillas → poca experiencia."},
+{t:6,u:"U5",q:"¿A qué actividades se asignan primero los recursos limitados?",opts:["A las del camino crítico","A las de mayor holgura","A las actividades ficticias","A las más baratas"],c:0,e:"Sus desviaciones se trasladan directamente al proyecto."},
+{t:6,u:"U5",q:"Orden correcto de las etapas de desarrollo de equipos (PMBOK):",opts:["Formación, Turbulencia, Normalización, Desempeño, Disolución","Turbulencia, Formación, Desempeño, Disolución, Normalización","Formación, Desempeño, Turbulencia, Normalización, Disolución","Normalización, Formación, Turbulencia, Disolución, Desempeño"],c:0,e:"Formación → Turbulencia → Normalización → Desempeño → Disolución."},
+{t:6,u:"U6",q:"La sobreasignación de un recurso ocurre cuando su ocupación es…",opts:["Inferior al 50 %","Exactamente del 100 %","Superior al 100 %","Igual a cero"],c:2,e:"Sobreasignado = ocupación superior al 100 %."},
+{t:6,u:"U6",q:"Retrasar una actividad no crítica para evitar el solape de un recurso se llama…",opts:["Compresión","Nivelación del recurso","Fast-tracking","Prorrateo"],c:1,e:"Nivelación = retrasar/adelantar una tarea no crítica hasta que el recurso esté disponible."},
+{t:6,u:"U6",q:"El objetivo de maximizar el aprovechamiento de recursos es contradictorio con…",opts:["Reducir la calidad","Ejecutar las tareas en el menor tiempo posible","Documentar el proyecto","Aumentar el presupuesto"],c:1,e:"Aprovechar al máximo la plantilla choca con terminar lo antes posible."},
+{t:6,u:"U6",q:"El gráfico que muestra el % de ocupación de cada recurso por periodo es…",opts:["La curva de la S","El gráfico de ocupación de recursos","El diagrama PERT","La matriz de habilidades"],c:1,e:"Objetivo: ocupación cercana al 100 % sin pasarse ni dejar vacíos."},
+{t:6,u:"U7",q:"El documento con tareas, fechas, secuencia, recursos e hitos para el seguimiento es…",opts:["El plan de recursos","El plan de trabajo","La matriz de habilidades","El acta del comité"],c:1,e:"Plan de trabajo: tareas, fechas, secuencia, recursos e hitos."},
+{t:6,u:"U7",q:"La diferencia del plan de recursos respecto al plan de trabajo es que…",opts:["No incluye costes","El sujeto activo es cada recurso, no la tarea","No tiene fechas","Solo aplica a proyectos ágiles"],c:1,e:"El plan de recursos se elabora desde la óptica de cada recurso."},
+{t:6,u:"U7",q:"¿Cuál es una característica del plan de trabajo?",opts:["Debe ser inmodificable","Debe ayudar a identificar las actividades críticas","Debe ocultar las relaciones entre tareas","Debe tener un único nivel de detalle"],c:1,e:"Comprensible, modificable, identifica críticas y admite varios niveles."},
+
+/* ===== TEMA 07 ===== */
+{t:7,u:"U1",q:"Según Reifer, el control es…",opts:["Hacer que las cosas ocurran de forma ordenada o según lo planificado","Eliminar todos los riesgos del proyecto","Aumentar el presupuesto disponible","Documentar el código fuente"],c:0,e:"Definición de control de Reifer."},
+{t:7,u:"U1",q:"¿De quién es responsabilidad el control del proyecto?",opts:["Del cliente","Del programador","Del jefe de proyecto","Del comité de calidad"],c:2,e:"El control del proyecto es responsabilidad del Jefe de Proyecto."},
+{t:7,u:"U1",q:"Las tres desviaciones típicas a controlar son…",opts:["Tiempos, costes y alcance","Calidad, tiempos y personal","Riesgos, costes y marketing","Alcance, ventas y soporte"],c:0,e:"Tiempos (retrasos), costes (sobrecostes) y alcance (requisitos)."},
+{t:7,u:"U1",q:"Medir costes y tiempos con el mismo sistema se refiere a…",opts:["El diagrama de Gantt","El método del valor ganado","La curva de la S","El análisis DAFO"],c:1,e:"Valor ganado: un proyecto retrasado no implica perder dinero, ni uno adelantado ganarlo."},
+{t:7,u:"U2",q:"«El trabajo se expande hasta agotar el tiempo disponible» es la ley de…",opts:["Nathan","Parkinson","Brooks","Murphy"],c:1,e:"Ley de Parkinson."},
+{t:7,u:"U2",q:"«Añadir gente a un proyecto software con retraso hace que se retrase más» es la ley de…",opts:["Brooks","Parkinson","Spector","Peter"],c:0,e:"Ley de Brooks."},
+{t:7,u:"U2",q:"La regla 0/100 (sistema binario de DeMarco) significa que…",opts:["Se gana el 50 % al empezar","No se gana valor hasta acabar la actividad","Se prorratea el valor cada día","Se gana el 100 % al empezar"],c:1,e:"0/100: hecho o no hecho; las tareas no deben ser muy largas."},
+{t:7,u:"U2",q:"El «síndrome del 90 % eterno» se relaciona con…",opts:["La nivelación de recursos","La estimación subjetiva del % de tarea realizada","El análisis DAFO","La curva de la S"],c:1,e:"Estimar el % es subjetivo; por eso se usan reglas 50/50 y 0/100."},
+{t:7,u:"U3",q:"La curva de la S representa…",opts:["Los costes por período","Los costes acumulados en el tiempo","El número de recursos disponibles","La probabilidad de los riesgos"],c:1,e:"Curva S = costes acumulados; la línea base = costes por período."},
+{t:7,u:"U3",q:"Conviene relacionar el avance del proyecto con los costes…",opts:["Totales","Indirectos","Directos","Fijos"],c:2,e:"Costes directos: si no hay actividad, no hay coste directo (relación más real)."},
+{t:7,u:"U3",q:"Una curva de la S de un «proyecto tardío» concentra las actividades…",opts:["Al inicio del proyecto","En el tercio final","De forma uniforme","En forma sinusoidal"],c:1,e:"Tardío: actividades hacia el tercio final; sacrifica plazo para reducir riesgos."},
+{t:7,u:"U3",q:"En caso de retraso en plazos, la curva S de avance real se sitúa…",opts:["Por encima de la curva programada","Por debajo de la curva programada","Exactamente igual","Siempre como una recta"],c:1,e:"Retraso → por debajo; se corrige acelerando actividades."},
+{t:7,u:"U4",q:"El valor ganado (EV) es…",opts:["El coste real del trabajo realizado","El coste presupuestado del trabajo realizado","El coste presupuestado del trabajo programado","El presupuesto total del proyecto"],c:1,e:"EV (BCWP) = coste presupuestado (no real) del trabajo realizado."},
+{t:7,u:"U4",q:"La variación de coste se calcula como:",opts:["VC = EV − PV","VC = EV − AC","VC = PV − AC","VC = AC − EV"],c:1,e:"VC = EV − AC; si VC < 0 hay sobrecoste."},
+{t:7,u:"U4",q:"Si el IDP (SPI) es menor que 1, el proyecto está…",opts:["Adelantado","En plazo","Retrasado en el cronograma","Sin costes"],c:2,e:"IDP = EV/PV; < 1 indica retraso."},
+{t:7,u:"U4",q:"PV = 300.000 €, AC = 325.000 €, EV = 300.000 €. La variación de coste (VC) es:",opts:["+25.000 €","−25.000 €","0 €","−300.000 €"],c:1,e:"VC = EV − AC = 300.000 − 325.000 = −25.000 € (sobrecoste)."},
+{t:7,u:"U4",q:"Con EV = 300.000 € y AC = 325.000 €, el IDC (CPI) es aproximadamente:",opts:["1,08","0,92","1,00","0,75"],c:1,e:"IDC = EV/AC = 300/325 ≈ 0,923 (sobrecoste)."},
+{t:7,u:"U4",q:"Si IDC > 1, el proyecto es…",opts:["Ineficiente, con sobrecoste","Eficiente, por debajo del presupuesto","Está retrasado","Está parado"],c:1,e:"IDC > 1 = eficiente, por debajo del presupuesto (ahorro)."},
+{t:7,u:"U4",q:"El factor de productividad ICP se define como:",opts:["IDC + IDP","IDC × IDP","IDC − IDP","EV / BAC"],c:1,e:"ICP = IDC × IDP; cuanto más lejos de 1, más difícil recuperarse."},
+{t:7,u:"U5",q:"¿Qué debe incluir un informe de seguimiento?",opts:["Solo el presupuesto","Acta anterior, estado, seguimiento, puntos abiertos, próximos compromisos y anexos","Únicamente el código fuente","El manual de usuario"],c:1,e:"Esos son los contenidos del informe de seguimiento."},
+{t:7,u:"U5",q:"El seguimiento de la planificación dentro del informe se realiza mediante…",opts:["El análisis DAFO","El método del valor ganado","La matriz de habilidades","El histograma"],c:1,e:"Muestra el cumplimiento en plazo y coste con EVM."},
+{t:7,u:"U5",q:"En «puntos abiertos» se documenta, por cada problema…",opts:["Solo el coste","Desviación/problema, impacto potencial y acción correctora","El nombre del programador","La fecha de nacimiento del cliente"],c:1,e:"Tabla: problema → impacto potencial → acción correctora."},
+{t:7,u:"U6",q:"Un retraso «de una semana» se gestiona normalmente a nivel…",opts:["Estratégico","Táctico (director del proyecto)","Operativo (técnicos)","No se gestiona"],c:1,e:"Táctico = director; estratégico = drástico; operativo = pequeños ajustes."},
+{t:7,u:"U6",q:"¿Cuál es el plazo máximo recomendado para una crisis?",opts:["7 días","30 días","90 días","Un año"],c:1,e:"Máximo 30 días; si se supera, replantear la viabilidad."},
+{t:7,u:"U6",q:"«Forzar al equipo para que la realidad se aproxime al plan» es…",opts:["Replanificar","Corregir las desviaciones","Aceptar el riesgo","Transferir"],c:1,e:"Corregir (frente a replanificar, que ajusta el plan a la realidad)."},
+{t:7,u:"U6",q:"El estudio postmortem sirve para…",opts:["Despedir al equipo","Documentar y aprender de lo que fue mal","Aumentar el presupuesto","Ocultar los problemas"],c:1,e:"Examinar qué fue mal, identificar problemas sistemáticos y documentar."},
+{t:7,u:"U7",q:"El PMI define un riesgo como…",opts:["Un error de programación","La posibilidad de sufrir un daño o pérdida","Una tarea crítica","Un hito del proyecto"],c:1,e:"Definición del PMI (1996)."},
+{t:7,u:"U7",q:"¿Cuál NO es una de las categorías de riesgo del tema?",opts:["Riesgos del proyecto","Riesgos técnicos","Riesgos del negocio","Riesgos meteorológicos"],c:3,e:"Categorías: del proyecto, técnicos y del negocio."},
+{t:7,u:"U7",q:"Los riesgos que se extrapolan de la experiencia en proyectos anteriores son…",opts:["Conocidos","Predecibles","Impredecibles","Positivos"],c:1,e:"Predecibles = se extrapolan de la experiencia previa."},
+{t:7,u:"U7",q:"El nivel de gestión de riesgo de «apagar el fuego» es…",opts:["Prevención","Mitigación","Control de crisis","Eliminación de causas"],c:2,e:"Control de crisis: reaccionar solo cuando el riesgo ya se ha producido."},
+{t:7,u:"U7",q:"La «Ley de Murphy» enuncia que…",opts:["El trabajo se expande hasta agotar el tiempo","Si algo puede acabar en catástrofe, alguien elegirá esa forma","Añadir gente a un proyecto lo retrasa más","Todo empleado asciende a su nivel de incompetencia"],c:1,e:"Ley de Murphy. La última opción es el Principio de Peter."},
+{t:7,u:"U8",q:"Según PMBOK, un riesgo positivo es…",opts:["Una amenaza","Una oportunidad","Un problema","Una crisis"],c:1,e:"Negativo = amenaza; positivo = oportunidad (respuestas: mejorar, compartir)."},
+{t:7,u:"U8",q:"El «Valor Monetario Esperado» se calcula como:",opts:["Probabilidad + Valor","Probabilidad × Valor","Valor − Probabilidad","Valor / Probabilidad"],c:1,e:"VME = Probabilidad × Valor."},
+{t:7,u:"U8",q:"¿Cuál es una técnica de identificación de riesgos?",opts:["Curva de la S","Análisis DAFO","Diagrama de Gantt","Histograma de recursos"],c:1,e:"Brainstorming, Delphi, entrevistas, DAFO y listas de chequeo."},
+{t:7,u:"U8",q:"«Contratar un seguro» para trasladar el riesgo a un tercero es la estrategia de…",opts:["Evitar","Mitigar","Transferir","Aceptar"],c:2,e:"Transferir = trasladar el riesgo a un tercero (p. ej. seguros)."},
+{t:7,u:"U8",q:"La priorización de riesgos en PMBOK se denomina…",opts:["Análisis cuantitativo","Análisis cualitativo de riesgos","Monitorización","Resolución"],c:1,e:"Ordenar por probabilidad × impacto = análisis cualitativo."},
+
+/* ===== EXAMEN 2º PARCIAL (oficial) ===== */
+{t:"EX",u:"EX1",q:"1. La programación del proyecto hace referencia a:",opts:["El desarrollo del código fuente del programa","Definir las actividades, identificando relaciones y estimando duraciones aproximadas","Fijar inicio y fin estimados de cada actividad, asignar recursos y determinar holguras"],c:2,e:"Programar = el «cuándo»: fechas, recursos y holguras. La opción b describe la planificación."},
+{t:"EX",u:"EX1",q:"2. La parte de holgura que puede consumirse sin afectar al comienzo temprano de las actividades siguientes es la:",opts:["Holgura total de la actividad","Holgura libre de la actividad","Holgura independiente de la actividad"],c:1,e:"Holgura libre HL = ESj − (ESi + Tij): no afecta al comienzo temprano de la siguiente."},
+{t:"EX",u:"EX1",q:"3. Respecto al camino crítico, podemos decir:",opts:["Todas las tareas con holgura 0 pertenecen al camino crítico","El camino crítico en un grafo es único","Todas las tareas del camino crítico tienen holgura 0"],c:2,e:"Holgura 0 es necesaria pero no suficiente, y el camino crítico no tiene por qué ser único."},
+{t:"EX",u:"EX1",q:"4. Una de las principales ventajas de los diagramas de Gantt es que:",opts:["Permite evaluar y comparar diferentes alternativas de implementación","Permite determinar con antelación posibles puntos de conflicto","Permite una rápida comparación con el progreso actual de cada tarea"],c:2,e:"Ventaja del Gantt: visualizar y comparar con el progreso real. a y b son, de hecho, desventajas."},
+{t:"EX",u:"EX1",q:"5. Al utilizar herramientas automatizadas de gestión de proyectos:",opts:["Cualquier herramienta es válida, lo importante es automatizar","Su capacidad para generar gráficos e informes es un factor determinante","La potencia y flexibilidad de la herramienta no es determinante"],c:1,e:"La potencia, la flexibilidad y la capacidad de generar gráficos e informes sí son determinantes."},
+{t:"EX",u:"EX1",q:"6. Al asignar recursos a las actividades, hay que:",opts:["Asignar tareas sencillas a recursos sin experiencia","Asignar tareas cortas a recursos sin experiencia","Asignar tareas cortas a recursos con experiencia para mejorar la productividad"],c:0,e:"Equilibrio dificultad/experiencia: tareas sencillas → recursos con poca experiencia."},
+{t:"EX",u:"EX1",q:"7. Sobre la nivelación de recursos, es cierto que:",opts:["Una carga equilibrada suele producir la ejecución en el menor tiempo posible","La herramienta básica para comprobar la nivelación de un recurso es el histograma","El equilibrado de cargas busca no tener recursos ociosos ni sobrecargados"],c:2,e:"Equilibrar cargas = evitar ociosos y sobrecargados. La opción a es falsa (es un objetivo contradictorio con el menor tiempo)."},
+{t:"EX",u:"EX1",q:"8. El documento que identifica para cada tarea sus fechas de inicio y fin, relaciones y recursos asignados es:",opts:["Plan de trabajo","Histograma","Plan de recursos"],c:0,e:"Plan de trabajo (óptica de las tareas)."},
+{t:"EX",u:"EX1",q:"9. El objetivo básico de los procesos de control del proyecto es:",opts:["Hacer que la realidad se ajuste a la planificación prevista","Conocer y entender desviaciones para corregirlas (tareas, alcance y/o planificación) y aprender para mejorar estimaciones futuras","Ir modificando la planificación para ajustarla a la realidad"],c:1,e:"Detectar y entender desviaciones, corregir y aprender. a y c son acciones parciales."},
+{t:"EX",u:"EX1",q:"10. El dato de porcentaje completado de cada tarea:",opts:["Es un dato subjetivo y de difícil medición exacta","Es totalmente objetivo (horas empleadas/horas previstas)","No se suele usar por ser imposible de estimar"],c:0,e:"El % completado tiene un fuerte componente subjetivo."},
+{t:"EX",u:"EX1",q:"11. Si las tareas se ejecutan exactamente en el tiempo estimado…",opts:["Indica unívocamente una buena gestión","Indica unívocamente que se falsean los datos","Debemos preguntarnos si, por la ley de Parkinson, se han dilatado los trabajos mientras había plazo"],c:2,e:"Cuidado con la ley de Parkinson: el trabajo puede dilatarse hasta agotar el plazo."},
+{t:"EX",u:"EX1",q:"12. En la línea de avance sobre un Gantt, para una tarea ya completada la línea se sitúa:",opts:["En el punto de fin de la tarea ya completada","No se desvía de la vertical del día actual","En el punto de inicio de la tarea"],c:0,e:"Una tarea al 100 % lleva su vértice al punto de fin de la tarea."},
+{t:"EX",u:"EX1",q:"13. Para el control de costes con el informe de actividad (horas imputadas):",opts:["No es cierto; basta con comparar el presupuesto con las facturas de pagos","Es suficiente con el informe de actividad","Se requiere además un gestor económico que totalice horas y costes y los compare con el presupuesto"],c:2,e:"Informe de actividad + gestor económico (totaliza horas, costes y gastos no vinculados a horas)."},
+{t:"EX",u:"EX1",q:"14. Al trazar la curva de avance físico, para el análisis de la tesorería se recomienda usar:",opts:["Los valores de coste devengados","Los valores de coste efectivos","La diferencia entre devengados y efectivos"],c:1,e:"Tesorería = aspectos financieros → valores efectivos (ingresos/pagos). Los devengados sirven para el análisis de avance."},
+{t:"EX",u:"EX1",q:"15. Si la curva de avance físico se desplaza de forma horizontal durante un periodo, se deduce que:",opts:["La actividad avanza a ritmo constante","El proyecto está detenido","Los ingresos son idénticos a los costes"],c:1,e:"Un tramo horizontal de la curva acumulada = no se incurre en costes = proyecto detenido."},
+{t:"EX",u:"EX1",q:"16. En el método del Valor Ganado, EV (Valor Ganado) se define como:",opts:["Coste presupuestado del trabajo programado para una fecha (PV)","Coste real incurrido por el trabajo ejecutado (AC)","Coste presupuestado (no real) del trabajo que se ha realizado"],c:2,e:"EV = coste presupuestado del trabajo realizado."},
+{t:"EX",u:"EX1",q:"17. Si PV < EV y AC < EV, entonces:",opts:["Adelanto en el cronograma y por debajo del coste de presupuesto","Retraso en el cronograma y sobrecoste","Adelanto en el cronograma y sobrecoste"],c:0,e:"EV>PV → adelanto; EV>AC → por debajo del coste (eficiente)."},
+{t:"EX",u:"EX1",q:"18. La relación EV/PV se define como:",opts:["Índice de rendimiento del coste (IDC, CPI)","Índice de rendimiento del programa (IDP, SPI)","Índice costo-programación (ICP, CSI)"],c:1,e:"EV/PV = IDP (SPI). El IDC sería EV/AC."},
+{t:"EX",u:"EX1",q:"19. El índice costo-programación (ICP) es un reflejo de la:",opts:["Eficacia","Eficiencia","Productividad"],c:2,e:"ICP = IDC × IDP = factor de productividad."},
+{t:"EX",u:"EX1",q:"20. El índice de rendimiento de coste (IDC):",opts:["Indica la eficiencia","Cuanto más cercano a 1, menor probabilidad de acabar en pérdidas","Las dos son verdaderas"],c:0,e:"El IDC indica la eficiencia en coste. La opción b confunde el IDC con la propiedad del ICP (cuanto más lejos de 1, más difícil recuperarse)."},
+{t:"EX",u:"EX1",q:"21. De las ventajas del Valor Ganado, ¿cuál NO es correcta?",opts:["Da datos fiables y avisa de problemas, aunque requiere que el proyecto esté medianamente avanzado","Integra información sobre carga de trabajo, plazos y costes","La base de datos de proyectos finalizados es útil para comparar proyectos"],c:0,e:"NO es correcta: el EVM ofrece aviso TEMPRANO; no exige que el proyecto esté ya muy avanzado."},
+{t:"EX",u:"EX1",q:"22. Ante problemas por una fusión entre empresas, la decisión se toma a nivel:",opts:["Estratégico","Operativo","Táctico"],c:0,e:"Una fusión es una incidencia grave → nivel estratégico (decisiones drásticas)."},
+{t:"EX",u:"EX1",q:"23. Ante una crisis, ¿qué acción sería INCORRECTA?",opts:["Informar a todos, aunque se genere algo de inquietud","No marcar la fecha de finalización de la crisis, para no presionar","Realizar un estudio postmortem que identifique problemas sistemáticos"],c:1,e:"Incorrecta: SÍ hay que fijar una fecha de fin de crisis (máx. 30 días). Comunicar y hacer postmortem sí son correctas."},
+{t:"EX",u:"EX1",q:"24. Ante una incidencia durante el proyecto:",opts:["Se analiza y resuelve, sin valor en registrarla","Se analiza, resuelve y se registra en una ficha para el aprendizaje posterior","Se registra solo si afecta al alcance"],c:1,e:"Toda incidencia se registra (lecciones aprendidas)."},
+{t:"EX",u:"EX1",q:"25. Si, antes de la entrega, el cliente pide cambios que afectan a los requisitos:",opts:["Siempre deben incluirse en el alcance porque no se ha entregado","Se analizan y presupuestan, y luego se decide si hacerlos y cuándo","Si provocan retraso, siempre van a una segunda fase"],c:1,e:"Los cambios se analizan, presupuestan y planifican; después se decide."},
+{t:"EX",u:"EX1",q:"26. Sobre la gestión de riesgos:",opts:["Con un equipo previsor los proyectos llegan a ejecutarse sin riesgos","Con un equipo previsor los riesgos serán menores, pero no pueden eliminarse por completo","El impacto de los riesgos no se reduce aunque se gestionen"],c:1,e:"Los riesgos se reducen, pero no se eliminan del todo."},
+{t:"EX",u:"EX1",q:"27. Sobre las metodologías de gestión de riesgos:",opts:["Se basan en identificación, análisis, priorización y toma de medidas","Solo se centran en riesgos negativos","Solo consideran la probabilidad, no el impacto"],c:0,e:"Metodología: identificar → analizar → priorizar → tomar medidas (PMBOK incluye también riesgos positivos)."},
+{t:"EX",u:"EX1",q:"28. Verificar entradas y salidas de un componente sin importar su estructura interna es un enfoque de:",opts:["Caja blanca","Caja negra","Top-down (de arriba abajo)"],c:1,e:"Caja negra: solo entradas/salidas, sin mirar el código interno."},
+{t:"EX",u:"EX1",q:"29. Las pruebas de regresión sirven para:",opts:["Verificar funcionalidad y estructura de cada componente codificado","Verificar el comportamiento con los datos del entorno de producción","Evitar que un cambio posterior en un módulo afecte erróneamente a otros"],c:2,e:"Regresión = comprobar que un cambio no rompe el funcionamiento de otros módulos."},
+{t:"EX",u:"EX1",q:"30. La calidad de un sistema software:",opts:["Es a menudo subjetiva y depende del contexto y del objetivo","Es totalmente objetiva y evaluable con herramientas automatizadas","Su automatización es un problema sin apenas soluciones disponibles"],c:0,e:"La calidad es en muchos casos subjetiva y dependiente del contexto."},
+{t:"EX",u:"EX1",q:"31. En el cierre, la principal causa de que un cliente niegue su conformidad y el pago suele ser:",opts:["La aplicación no cumple expectativas por requisitos no especificados o ambiguos","El presupuesto es demasiado alto","El plazo de entrega se ha demorado"],c:0,e:"Insatisfacción por requisitos no especificados o ambiguos."},
+{t:"EX",u:"EX1",q:"32. En el cierre INTERNO del proyecto participa:",opts:["La empresa desarrolladora de la aplicación","La empresa cliente","Tanto la desarrolladora como el cliente"],c:0,e:"Cierre interno → solo la empresa desarrolladora."},
+{t:"EX",u:"EX1",q:"33. En el cierre interno, el análisis de cierre del proyecto comprende:",opts:["Datos generales (duración, costes por fases, retrasos, sobrecostes, cumplimiento)","Rentabilidad del proyecto","Análisis de desviaciones, causas y acciones correctoras, y lecciones aprendidas"],c:2,e:"Análisis interno = desviaciones, causas, acciones correctoras y lecciones aprendidas.",w:"⚠ Según la pregunta 50, el cierre interno también incluye los datos generales (opción a). Si el enunciado original admite varias, podría aceptarse a; contrástalo con el profesor."},
+{t:"EX",u:"EX1",q:"34. El comienzo más temprano (Early Start) de un evento se representa por convención mediante:",opts:["Un triángulo","Un cuadrado","Un círculo"],c:0,e:"ES → triángulo; LS → cuadrado."},
+{t:"EX",u:"EX1",q:"35. Para un evento, se cumple que:",opts:["Su comienzo más temprano y su final más temprano coinciden en el tiempo","Su comienzo más temprano siempre es menor que su final más temprano","Su comienzo más temprano siempre es mayor que su final más temprano"],c:0,e:"Los eventos no tienen duración: comienzo y final coinciden."},
+{t:"EX",u:"EX1",q:"36. Una de las principales desventajas de los diagramas de Gantt es que:",opts:["En proyectos largos y complejos es poco aplicable","Es lento de poner en marcha","Supone un desembolso económico importante"],c:0,e:"Poco aplicable en proyectos largos y complejos (muchas actividades)."},
+{t:"EX",u:"EX1",q:"37. El diagrama que muestra, para cada recurso, las tareas que realiza sobre un calendario y su grado de ocupación por tarea y total, se denomina:",opts:["Diagrama de carga de trabajo","Gráfico de ocupación de recursos","Histograma"],c:0,e:"Diagrama de carga de trabajo (Gantt con los recursos y sus tareas/ocupación)."},
+{t:"EX",u:"EX1",q:"38. El resultado de la ASIGNACIÓN de recursos es:",opts:["La relación de recursos disponibles organizados jerárquicamente (RBS)","Los requisitos de recursos de cada actividad","La relación de qué recursos disponibles se aplican a cada actividad según lo que requiere"],c:2,e:"Asignación = emparejar recursos disponibles con las actividades según sus requisitos."},
+{t:"EX",u:"EX1",q:"39. La responsabilidad principal de los procesos de control recae en:",opts:["El cliente","Analistas y desarrolladores","El jefe de proyecto"],c:2,e:"Responsabilidad del jefe de proyecto."},
+{t:"EX",u:"EX1",q:"40. Si PV < EV y AC > EV, entonces:",opts:["Adelanto en el cronograma y por debajo del presupuesto","Retraso en el cronograma y sobrecoste","Adelanto en el cronograma y sobrecoste"],c:2,e:"EV>PV → adelanto; AC>EV → sobrecoste."},
+{t:"EX",u:"EX1",q:"41. El control de cambios del proyecto:",opts:["Siempre es preventivo y se vincula a la gestión del riesgo","Siempre es correctivo: corrige los problemas una vez ocurren","Puede realizarse antes, durante o después de cada uno de los procesos"],c:2,e:"El control de cambios puede aplicarse antes, durante o después de los procesos."},
+{t:"EX",u:"EX1",q:"42. Sobre los riesgos en un sistema software, ¿qué afirmación NO es correcta?",opts:["Son independientes del contexto y del objetivo que se pretende","La nula gestión del conocimiento en empresas TIC contribuye a su aparición","Los escasos periodos de pruebas contribuyen a su aparición"],c:0,e:"NO es correcta: los riesgos dependen del contexto y del objetivo."},
+{t:"EX",u:"EX1",q:"43. Las pruebas que verifican funcionalidad y estructura de cada componente una vez codificado se denominan:",opts:["Pruebas de aceptación","Pruebas de regresión","Pruebas unitarias"],c:2,e:"Pruebas unitarias (por componente codificado)."},
+{t:"EX",u:"EX1",q:"44. Verificar la estructura interna de un componente (no su funcionalidad) es un enfoque de:",opts:["Caja blanca","Caja negra","Bottom-up (de abajo arriba)"],c:0,e:"Caja blanca: se inspecciona la estructura interna/código."},
+{t:"EX",u:"EX1",q:"45. Las pruebas de software sirven para comprobar:",opts:["Que el componente se ensambla bien con los demás","Que las interfaces con otros sistemas son correctas","Las dos son verdaderas"],c:2,e:"Comprueban ensamblaje e interfaces con otros sistemas."},
+{t:"EX",u:"EX1",q:"46. Un elemento fundamental que determina la calidad de un producto software es:",opts:["Su flexibilidad","Su fiabilidad","Las dos son verdaderas"],c:2,e:"Flexibilidad y fiabilidad son ambas factores de calidad."},
+{t:"EX",u:"EX1",q:"47. Al pasar a producción una nueva versión con base de datos instalada, se debe proporcionar:",opts:["Una copia de seguridad previa","Copia de seguridad previa y un script de actualización","Copia de seguridad previa, script de actualización y un mecanismo de marcha atrás"],c:2,e:"Backup + script de actualización + mecanismo de rollback (marcha atrás)."},
+{t:"EX",u:"EX1",q:"48. NO es tarea fundamental de la fase de mantenimiento:",opts:["Asegurar que el sistema sigue solucionando las necesidades de los usuarios","Entregar la traza detallada de los cambios realizados en el sistema","Identificar los riesgos que afectan al sistema"],c:1,e:"Entregar la traza detallada de los cambios no es una tarea fundamental del mantenimiento; a y c sí lo son."},
+{t:"EX",u:"EX1",q:"49. Sobre los manuales de usuario:",opts:["No deben presupuestarse; se hacen siempre y el cliente los da por incluidos","Se suelen realizar en función del perfil de usuario que los va a leer","Las dos son verdaderas"],c:1,e:"Se hacen según el perfil del usuario; además deben presupuestarse (la opción a es falsa)."},
+{t:"EX",u:"EX1",q:"50. En el cierre interno, el análisis del proyecto debe comprender:",opts:["Datos generales (duración y costes por fases, retrasos, sobrecostes, cumplimiento)","Análisis de desviaciones, causas, acciones correctoras y lecciones aprendidas","Las dos anteriores"],c:2,e:"Comprende tanto los datos generales como el análisis de desviaciones y lecciones aprendidas."},
+{t:"EX",u:"EX1",q:"51. Dentro del proceso de planificación, la programación suele realizarse:",opts:["Inmediatamente tras el desglose de tareas y recursos","Tras el desglose de tareas y recursos y la ordenación temporal (lógica) de las tareas","Tras la elaboración del presupuesto"],c:1,e:"Etapas: desglose → ordenación/organización → programación → presupuesto."},
+{t:"EX",u:"EX1",q:"52. La holgura disponible tras realizar la actividad si todas las predecesoras empezaron en su LS es la:",opts:["Holgura total de la actividad","Holgura libre de la actividad","Holgura independiente de la actividad"],c:2,e:"Holgura independiente HI = ESj − (LSi + Tij)."},
+{t:"EX",u:"EX1",q:"53. Respecto al camino crítico podemos decir:",opts:["Todas las tareas con holgura 0 pertenecen al camino crítico","El camino crítico en un grafo no es único","Las dos son verdaderas"],c:1,e:"El camino crítico no es único (puede haber varios). Tener holgura 0 no garantiza pertenecer a él."},
+{t:"EX",u:"EX1",q:"54. Una de las principales desventajas de los diagramas de Gantt es que:",opts:["Es complicado de entender","No permite integrar planificación y programación en un único gráfico","Tiende a desactualizarse rápidamente"],c:2,e:"Tiende a desactualizarse rápidamente."},
+{t:"EX",u:"EX1",q:"55. Con recursos limitados que asignar a varias actividades, se recomienda:",opts:["Asignarlos proporcionalmente a todas las tareas según su duración","Asignarlos primero a las tareas del camino crítico","Asignarlos primero a las tareas más grandes"],c:1,e:"Primero a las tareas del camino crítico (sus desviaciones afectan al proyecto)."},
+{t:"EX",u:"EX1",q:"56. La diferencia principal entre el plan de trabajo y el plan de recursos es que:",opts:["El plan de trabajo recoge la programación desde las tareas y el otro desde los recursos","Son el mismo documento","El de trabajo se entrega en la oferta y el de recursos al terminar"],c:0,e:"Plan de trabajo = óptica de las tareas; plan de recursos = óptica de los recursos."},
+{t:"EX",u:"EX1",q:"57. Para el control de avance se necesitan los planes de ejecución, la medición del avance y:",opts:["La definición de los perfiles de los miembros del equipo","La documentación del ciclo de vida elegido, para controlar su cumplimiento","Los objetivos del proyecto, para comparar con la situación actual"],c:2,e:"Controlar = comparar lo real con lo planificado y con los objetivos.",w:"⚠ La pregunta aparece truncada en el original; conviene verificarla."},
+{t:"EX",u:"EX1",q:"58. En los procesos de control, los criterios de control:",opts:["Siempre se reducen a tiempos y costes","Incluyen tiempos y costes, y también objetivos, cambios, calidad y riesgos","Siempre se reducen a calidad y riesgos"],c:1,e:"Tiempos y costes, y además objetivos, cambios al objetivo, calidad y riesgos."},
+{t:"EX",u:"EX1",q:"59. ¿Qué técnica permite identificar de forma visual el estado real de cada tarea frente a lo planificado?",opts:["El valor ganado del proyecto","El histograma","Los diagramas de barras comparativos sobre un Gantt"],c:2,e:"Diagramas de barras comparativos (real vs planificado) sobre el Gantt."},
+{t:"EX",u:"EX1",q:"60. Sobre el porcentaje en que cada tarea se encuentra completada:",opts:["Solo pueden considerarse los valores 0 % y 100 %","Se definen pasos/hitos intermedios y el avance será el % de hitos completados","Se utiliza el ratio horas realizadas / horas estimadas"],c:1,e:"Para evitar el % subjetivo se definen hitos intermedios (avance = % de hitos completados).",w:"⚠ Enunciado truncado en el original; conviene verificarlo."},
+{t:"EX",u:"EX1",q:"61. La herramienta que muestra el nivel de costes incurridos en cada periodo se denomina:",opts:["Línea de presupuesto","Línea de coste (línea base de coste, costes por periodo)","Curva de la S"],c:1,e:"Costes por periodo = línea base de coste.",w:"⚠ Enunciado truncado. Si se refiere a costes ACUMULADOS, la respuesta sería la curva de la S (c)."},
+{t:"EX",u:"EX1",q:"62. El % de avance físico, para su presentación, se expresa en función de:",opts:["Siempre el coste incurrido","Siempre el tiempo de ejecución","Puede ser el coste, el tiempo o las horas/hombre consumidas"],c:2,e:"El avance físico puede expresarse en función del coste, el tiempo o las horas/hombre."},
+{t:"EX",u:"EX1",q:"63. Si se opta por un plan para identificar riesgos y evitar que se conviertan en problemas, se habla de:",opts:["Control de crisis","Mitigación de riesgos","Prevención de riesgos"],c:2,e:"Prevención: plan para identificar y evitar que los riesgos se conviertan en problemas."},
+{t:"EX",u:"EX1",q:"64. En la gestión de riesgos:",opts:["Se incluye análisis cuantitativo pero no cualitativo","Durante la planificación es necesario definir la metodología a seguir","El seguimiento solo se hace cuando ya ha aparecido un riesgo"],c:1,e:"La planificación de riesgos define la metodología (e incluye análisis cualitativo y cuantitativo, y seguimiento continuo)."},
+{t:"EX",u:"EX1",q:"65. ¿Cuál NO es propiamente una técnica de identificación del riesgo?",opts:["Árboles de decisión","Análisis DAFO","Listas de chequeo y cobertura"],c:0,e:"Los árboles de decisión son técnica de análisis/proyección, no de identificación."},
+{t:"EX",u:"EX1",q:"66. La cobertura de un juego de pruebas se define como:",opts:["El coste máximo asumible para las pruebas","El porcentaje del código de la aplicación que cubre el grupo de pruebas","El intervalo de tiempo destinado a las pruebas"],c:1,e:"Cobertura = % del código cubierto por las pruebas."},
+{t:"EX",u:"EX1",q:"67. Las pruebas de carga de un nuevo módulo en una empresa en funcionamiento se hacen sobre el entorno de:",opts:["Desarrollo","Preproducción o integración","Producción"],c:1,e:"Las pruebas de carga se hacen en preproducción/integración, no en producción."},
+{t:"EX",u:"EX1",q:"68. Un elemento fundamental que determina la calidad de un producto software es:",opts:["Su rentabilidad","Su automatización","Las dos son verdaderas"],c:-1,e:"Determinantes de la calidad son factores como la fiabilidad y la flexibilidad (ver pregunta 46).",w:"⚠ La pregunta parece tener una errata: ni la rentabilidad ni la automatización determinan la calidad del software. Verifícala con el profesor."},
+{t:"EX",u:"EX1",q:"69. El proceso de implantación y puesta en marcha de un desarrollo:",opts:["Consiste únicamente en instalar la aplicación para los usuarios","Incluye la formación y entrenamiento de usuarios y operadores","No incluye los procedimientos de mantenimiento ni de recuperación ante caídas"],c:1,e:"La implantación incluye formación y entrenamiento de usuarios y operadores."},
+{t:"EX",u:"EX1",q:"70. Elaborar el documento que describe las operaciones de mantenimiento (seguridad, recuperación ante desastres…) es responsabilidad de:",opts:["La empresa desarrolladora de la aplicación","Los administradores de sistemas de la empresa cliente","Los usuarios"],c:0,e:"La elaboración de esa documentación corresponde a la empresa desarrolladora."},
+{t:"EX",u:"EX1",q:"71. Sobre los manuales de usuario:",opts:["Aumentan el nivel de consultas del cliente al departamento técnico","Deben presupuestarse, pues documentar suele llevar más tiempo del esperado","Son un entregable prescindible"],c:1,e:"Deben presupuestarse correctamente: escribir documentación lleva más tiempo del previsto."},
+{t:"EX",u:"EX1",q:"72. En el cierre ADMINISTRATIVO (el primero) participa:",opts:["La empresa desarrolladora de la aplicación","La empresa cliente","Tanto la desarrolladora como el cliente"],c:2,e:"El cierre administrativo implica a ambas partes (desarrolladora y cliente)."}
+];
+
+const state = { filter:"all", answered:{}, correct:{} };
+const LETTERS=["A","B","C","D"];
+const quizEl=document.getElementById("quiz");
+
+function buildQuiz(){
+  quizEl.innerHTML=""; let idx=0;
+  [6,7,"EX"].forEach(t=>{
+    const U=UNITS[t];
+    const temaQs=Q.map((q,i)=>({q,i})).filter(o=>String(o.q.t)===String(t));
+    const wrap=document.createElement("section");
+    wrap.className="tema-block "+(t===7?"t7scope":(t==="EX"?"exscope":""));
+    wrap.dataset.tema=String(t);
+    const h=document.createElement("div"); h.className="tema-h "+U.cls; h.textContent=U.title; wrap.appendChild(h);
+    if(U.note){const n=document.createElement("div");n.className="tema-note";n.textContent=U.note;wrap.appendChild(n);}
+    U.order.forEach(u=>{
+      const us=temaQs.filter(o=>o.q.u===u); if(!us.length) return;
+      if(t!=="EX"){ const uh=document.createElement("div"); uh.className="unit-h "+U.cls;
+        uh.innerHTML='<span class="u">'+u+'</span> '+U.names[u]; wrap.appendChild(uh); }
+      us.forEach(o=>{ idx++; wrap.appendChild(card(o.q,o.i,o.q.t==="EX"?(temaQs.indexOf(o)+1):idx,t)); });
+    });
+    quizEl.appendChild(wrap);
+  });
+  applyFilter();
+}
+
+function card(q,i,number,t){
+  const c=document.createElement("div"); c.className="q"; c.dataset.qi=i;
+  const accent = t===6?"var(--blue)":(t===7?"var(--green)":"var(--violet)");
+  const label = t==="EX" ? "" : '<div class="num" style="color:'+accent+'">Pregunta '+number+'</div>';
+  c.innerHTML=label+'<div class="prompt">'+q.q+'</div>';
+  const opts=document.createElement("div"); opts.className="opts";
+  q.opts.forEach((txt,oi)=>{
+    const b=document.createElement("button"); b.className="opt"; b.type="button";
+    b.innerHTML='<span class="key">'+LETTERS[oi]+'</span><span>'+txt+'</span>';
+    b.addEventListener("click",()=>choose(c,q,i,oi));
+    opts.appendChild(b);
+  });
+  c.appendChild(opts);
+  const exp=document.createElement("div"); exp.className="exp"; c.appendChild(exp);
+  return c;
+}
+
+function choose(card,q,i,oi){
+  if(state.answered[i]!==undefined) return;
+  state.answered[i]=oi;
+  const review = q.c<0;            // pregunta marcada a revisar (errata)
+  const right = !review && oi===q.c;
+  state.correct[i]=right;
+  const btns=card.querySelectorAll(".opt");
+  btns.forEach((b,bi)=>{
+    b.disabled=true;
+    if(review){ b.classList.add("dim"); if(bi===oi){b.classList.remove("dim");b.classList.add("pick");} }
+    else if(bi===q.c) b.classList.add("correct");
+    else if(bi===oi) b.classList.add("wrong");
+    else b.classList.add("dim");
+  });
+  const exp=card.querySelector(".exp");
+  let head = review ? '<span class="verdict rev">⚠ Pregunta a revisar. </span>'
+                    : '<span class="verdict '+(right?"ok":"no")+'">'+(right?"✓ ¡Correcto! ":"✗ Incorrecto. ")+'</span>';
+  exp.innerHTML = head + q.e + (q.w?'<span class="flag">'+q.w+'</span>':'');
+  exp.classList.add("show");
+  updateScore();
+}
+
+function inFilter(q){ return state.filter==="all" || String(q.t)===state.filter; }
+function visibleCount(){ return Q.filter(q=>inFilter(q) && q.c>=0).length; }
+function updateScore(){
+  let ans=0,hit=0;
+  Q.forEach((q,i)=>{ if(!inFilter(q)||q.c<0) return;
+    if(state.answered[i]!==undefined){ans++; if(state.correct[i])hit++;} });
+  const total=visibleCount();
+  document.getElementById("hits").textContent=hit;
+  document.getElementById("ans").innerHTML=ans+'<span style="font-size:16px;color:var(--muted)">/'+total+'</span>';
+  const pct=ans?Math.round(hit/ans*100):0;
+  document.getElementById("pct").textContent=pct+"%";
+  document.getElementById("barfill").style.width=(total?ans/total*100:0)+"%";
+  const banner=document.getElementById("doneBanner");
+  if(ans===total && total>0){ banner.textContent="🎉 Bloque completado: "+hit+" de "+total+" aciertos ("+pct+"%)."; banner.classList.add("show"); }
+  else banner.classList.remove("show");
+}
+function applyFilter(){
+  document.querySelectorAll(".tema-block").forEach(s=>{
+    s.classList.toggle("hidden", !(state.filter==="all"||s.dataset.tema===state.filter));
+  });
+  updateScore();
+}
+document.getElementById("filters").addEventListener("click",e=>{
+  const chip=e.target.closest(".chip"); if(!chip) return;
+  state.filter=chip.dataset.f;
+  document.querySelectorAll(".chip").forEach(c=>c.setAttribute("aria-pressed",c===chip?"true":"false"));
+  applyFilter(); window.scrollTo({top:0,behavior:"smooth"});
+});
+document.getElementById("resetBtn").addEventListener("click",()=>{
+  state.answered={}; state.correct={}; buildQuiz(); window.scrollTo({top:0,behavior:"smooth"});
+});
+buildQuiz();
+</script>
+</body>
+</html>
