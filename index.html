@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Test GPI · Temas 06 y 07 + Examen 2º Parcial</title>
+<title>Test GPI · Temas 06-08 + Examen 2º Parcial</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,900&family=Albert+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,6 +12,7 @@
     --ink:#1c2430; --muted:#6b7686; --line:#e7e3da; --paper:#f6f3ec; --card:#fffdf8;
     --blue:#2f6fb0; --blue-d:#15314f; --blue-bg:#eef5fc;
     --green:#1f7a5a; --green-d:#0f3d2e; --green-bg:#eef7f2;
+    --orange:#c2410c; --orange-d:#7c2d12; --orange-bg:#fcefe6;
     --violet:#6b3fa0; --violet-d:#3f2566; --violet-bg:#f3ecfa;
     --good:#2f8a4e; --good-bg:#e6f5ec; --bad:#c0392b; --bad-bg:#fbe9e7; --warn:#b07d00; --warn-bg:#fff6e0;
     --shadow:0 1px 2px rgba(20,30,40,.04),0 8px 24px rgba(20,30,40,.06);
@@ -31,7 +32,7 @@
   .score .lbl{font-size:11px;text-transform:uppercase;letter-spacing:1px;color:var(--muted);font-weight:600;}
   .score .stat{display:flex;flex-direction:column;gap:2px;}
   .bar{flex:1;min-width:120px;height:10px;border-radius:99px;background:#eceae2;overflow:hidden;}
-  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--violet));transition:width .5s cubic-bezier(.2,.8,.2,1);}
+  .bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--orange),var(--violet));transition:width .5s cubic-bezier(.2,.8,.2,1);}
   .reset{margin-left:auto;border:1px solid var(--line);background:#fff;color:var(--muted);font-weight:600;font-size:13px;
     padding:8px 14px;border-radius:99px;cursor:pointer;transition:.2s;font-family:inherit;}
   .reset:hover{border-color:var(--bad);color:var(--bad);}
@@ -44,17 +45,20 @@
   .chip.all[aria-pressed="true"]{background:var(--ink);}
   .chip.t6[aria-pressed="true"]{background:var(--blue);}
   .chip.t7[aria-pressed="true"]{background:var(--green);}
+  .chip.t8[aria-pressed="true"]{background:var(--orange);}
   .chip.ex[aria-pressed="true"]{background:var(--violet);}
 
   .tema-h{font-family:'Fraunces',serif;font-weight:900;font-size:24px;margin:34px 0 4px;padding-left:14px;border-left:6px solid;}
   .tema-h.t6{border-color:var(--blue);color:var(--blue-d);}
   .tema-h.t7{border-color:var(--green);color:var(--green-d);}
+  .tema-h.t8{border-color:var(--orange);color:var(--orange-d);}
   .tema-h.ex{border-color:var(--violet);color:var(--violet-d);}
   .tema-note{font-family:'Albert Sans',sans-serif;font-size:13px;color:var(--muted);margin:6px 0 0;padding-left:14px;}
   .unit-h{font-weight:700;font-size:15px;letter-spacing:.3px;margin:26px 0 10px;display:flex;align-items:center;gap:10px;}
   .unit-h .u{font-size:11px;font-weight:700;color:#fff;padding:3px 9px;border-radius:99px;letter-spacing:.5px;}
   .unit-h.t6 .u{background:var(--blue);}
   .unit-h.t7 .u{background:var(--green);}
+  .unit-h.t8 .u{background:var(--orange);}
   .unit-h.ex .u{background:var(--violet);}
 
   .q{background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow);padding:18px 18px 6px;margin:12px 0;}
@@ -65,6 +69,7 @@
     padding:11px 13px;cursor:pointer;font-family:inherit;font-size:15px;color:var(--ink);transition:.16s;width:100%;}
   .opt:hover:not(:disabled){border-color:var(--blue);background:var(--blue-bg);transform:translateY(-1px);}
   .t7scope .opt:hover:not(:disabled){border-color:var(--green);background:var(--green-bg);}
+  .t8scope .opt:hover:not(:disabled){border-color:var(--orange);background:var(--orange-bg);}
   .exscope .opt:hover:not(:disabled){border-color:var(--violet);background:var(--violet-bg);}
   .opt:disabled{cursor:default;}
   .opt .key{flex:none;width:24px;height:24px;border-radius:7px;display:grid;place-items:center;font-weight:700;font-size:13px;
@@ -92,7 +97,7 @@
   <header>
     <div class="eyebrow">Gestión de Proyectos Informáticos</div>
     <h1>Test de repaso</h1>
-    <p>Temas 06 y 07 · Examen 2º Parcial (respuestas verificadas) · corrección instantánea</p>
+    <p>Temas 06, 07 y 08 · Examen 2º Parcial (respuestas verificadas) · corrección instantánea</p>
   </header>
 
   <div class="score">
@@ -107,12 +112,13 @@
     <button class="chip all" data-f="all" aria-pressed="true">Todo</button>
     <button class="chip t6"  data-f="6"   aria-pressed="false">Tema 06</button>
     <button class="chip t7"  data-f="7"   aria-pressed="false">Tema 07</button>
+    <button class="chip t8"  data-f="8"   aria-pressed="false">Tema 08</button>
     <button class="chip ex"  data-f="EX"  aria-pressed="false">★ Examen 2º Parcial</button>
   </div>
 
   <div class="done-banner" id="doneBanner"></div>
   <div id="quiz"></div>
-  <footer>Test de estudio · preguntas de repaso (Temas 06 y 07) y examen oficial del 2º parcial con respuestas verificadas.<br>Las respuestas se guardan solo en esta sesión. Las preguntas marcadas con ⚠ conviene contrastarlas.</footer>
+  <footer>Test de estudio · repaso de los Temas 06, 07 y 08 y examen oficial del 2º parcial con respuestas verificadas.<br>Las respuestas se guardan solo en esta sesión. Las preguntas marcadas con ⚠ conviene contrastarlas.</footer>
 </div>
 
 <script>
@@ -121,7 +127,9 @@ const UNITS = {
      names:{U1:"Planificación y programación",U2:"Método PERT",U3:"Diagramas de Gantt",U4:"Herramientas",U5:"Asignación de recursos",U6:"Nivelación de recursos",U7:"Resultados de la programación"}},
   7:{cls:"t7",title:"Tema 07 · Control del Proyecto",order:["U1","U2","U3","U4","U5","U6","U7","U8"],
      names:{U1:"Control del proyecto",U2:"Control de tiempos",U3:"Control de costes",U4:"Método del valor ganado (EVM)",U5:"Informes de seguimiento",U6:"Acciones correctivas y crisis",U7:"Gestión de riesgos",U8:"Metodología de la gestión de riesgos"}},
-  EX:{cls:"ex",title:"Examen 2º Parcial (oficial)",note:"Preguntas reales del 2º parcial con las respuestas resueltas y verificadas. Las marcadas con ⚠ están truncadas en el original o parecen tener errata: conviene contrastarlas con el profesor.",
+  8:{cls:"t8",title:"Tema 08 · Pruebas, Calidad, Implantación y Cierre",order:["U1","U2","U3","U4","U5","U6","U7"],
+     names:{U1:"Pruebas (concepto, plan y entornos)",U2:"Tipos de prueba",U3:"Calidad del software",U4:"Implantación e instalación",U5:"Mantenimiento",U6:"Manuales",U7:"Cierre del proyecto"}},
+  EX:{cls:"ex",title:"Examen 2º Parcial (oficial)",note:"Preguntas reales del 2º parcial con las respuestas resueltas y verificadas (incluye correcciones tras revisar el Tema 08). Las marcadas con ⚠ están truncadas en el original o parecen tener errata.",
      order:["EX1"],names:{EX1:"Preguntas 1 – 72"}}
 };
 
@@ -196,6 +204,57 @@ const Q = [
 {t:7,u:"U8",q:"«Contratar un seguro» para trasladar el riesgo a un tercero es la estrategia de…",opts:["Evitar","Mitigar","Transferir","Aceptar"],c:2,e:"Transferir = trasladar el riesgo a un tercero (p. ej. seguros)."},
 {t:7,u:"U8",q:"La priorización de riesgos en PMBOK se denomina…",opts:["Análisis cuantitativo","Análisis cualitativo de riesgos","Monitorización","Resolución"],c:1,e:"Ordenar por probabilidad × impacto = análisis cualitativo."},
 
+/* ===== TEMA 08 ===== */
+// U1 Pruebas
+{t:8,u:"U1",q:"La célebre frase de Dijkstra sobre las pruebas dice que estas…",opts:["Demuestran la ausencia de errores","Pueden mostrar la presencia de errores, pero nunca su ausencia","Solo sirven al final del proyecto","Son innecesarias si el diseño es bueno"],c:1,e:"«Testing can show the presence of bugs, but never their absence» (Dijkstra)."},
+{t:8,u:"U1",q:"La cobertura de las pruebas es…",opts:["El coste de las pruebas","El porcentaje del código de la aplicación cubierto por un grupo de pruebas","El tiempo dedicado a probar","El número de testers"],c:1,e:"Cobertura = % del código que cubre un determinado grupo de pruebas."},
+{t:8,u:"U1",q:"¿Cuándo se realizan las pruebas?",opts:["Solo al final del desarrollo","En diversos momentos del desarrollo (en ágil, cada iteración/sprint)","Solo antes de la entrega","Solo si el cliente lo pide"],c:1,e:"No solo al final; en gestión ágil suelen hacerse en cada sprint."},
+{t:8,u:"U1",q:"El plan de pruebas debe incluir…",opts:["Solo el presupuesto","Los objetivos, los criterios de evaluación y los procedimientos","Únicamente el código fuente","El organigrama de la empresa"],c:1,e:"Objetivos, criterios razonados y procedimientos de preparación, ejecución y seguimiento."},
+{t:8,u:"U1",q:"¿Sobre qué entorno se realizan las pruebas unitarias?",opts:["Producción","Desarrollo","Integración","El equipo del cliente"],c:1,e:"Entorno de desarrollo (donde trabajan los desarrolladores)."},
+{t:8,u:"U1",q:"El entorno de integración/preproducción se caracteriza por…",opts:["Contener componentes no testados","Ser idéntico a producción y no contener componentes no testados","Ser donde trabajan los usuarios finales","No tener datos"],c:1,e:"Idéntico a producción (SO, configuración), sin componentes no testados; datos lo más parecidos a producción."},
+// U2 Tipos de prueba
+{t:8,u:"U2",q:"Las pruebas unitarias verifican…",opts:["El sistema completo integrado","La funcionalidad y estructura de cada componente individual ya codificado","La satisfacción del cliente","El hardware"],c:1,e:"Cada unidad por separado (en OO, las clases)."},
+{t:8,u:"U2",q:"El enfoque de caja blanca…",opts:["Solo considera entradas y salidas","Verifica la estructura interna del componente, no su funcionalidad","Lo realiza el cliente","Mide la usabilidad"],c:1,e:"Caja blanca/estructural: estructura interna, código no usado, caminos lógicos."},
+{t:8,u:"U2",q:"El enfoque de caja negra…",opts:["Examina el código fuente","Considera solo entradas y salidas, verificando la funcionalidad","Busca código duplicado","Verifica los caminos lógicos"],c:1,e:"Caja negra/funcional: entradas/salidas, sin mirar la estructura interna."},
+{t:8,u:"U2",q:"Las pruebas de integración verifican…",opts:["Cada componente por separado","El correcto ensamblaje entre los distintos componentes","La satisfacción del usuario","La rentabilidad"],c:1,e:"Ensamblaje entre componentes (ya probados unitariamente), en entorno similar a producción."},
+{t:8,u:"U2",q:"Las pruebas que realiza el cliente sobre el producto terminado para validarlo son…",opts:["Pruebas unitarias","Pruebas de integración","Pruebas de aceptación","Pruebas de regresión"],c:2,e:"Aceptación: las hace el cliente, funcionales, sobre el producto terminado; cubren requisitos y manual de usuario."},
+{t:8,u:"U2",q:"Las pruebas de regresión buscan…",opts:["Verificar la usabilidad","Evitar el «efecto onda»: que un cambio afecte erróneamente a otros módulos","Probar la instalación","Medir el rendimiento"],c:1,e:"Tras un cambio en producción; conviene tenerlas automatizadas."},
+{t:8,u:"U2",q:"El «smoke test»…",opts:["Prueba todo el sistema exhaustivamente","Prueba solo los elementos críticos de la aplicación","Es una prueba de usabilidad","Mide la cobertura de código"],c:1,e:"Smoke test: prueba rápida de los elementos críticos (en menos de 10 min)."},
+{t:8,u:"U2",q:"Las pruebas de carga / sobrecarga / stress…",opts:["Se hacen en el entorno de desarrollo","Comprueban cómo responde el sistema ante muchos usuarios/transacciones y se hacen en integración","Las realiza el cliente","Verifican la estructura interna del código"],c:1,e:"Detectan cuellos de botella; se hacen sobre integración para parecerse a producción."},
+{t:8,u:"U2",q:"Las pruebas de implantación incluyen…",opts:["Solo la codificación","Pruebas de instalación, desinstalación, arranque y parada en el entorno definitivo","El análisis de requisitos","El diseño de la BBDD"],c:1,e:"Instalación/desinstalación/arranque/parada; permiten al usuario hacer luego las pruebas de aceptación."},
+// U3 Calidad
+{t:8,u:"U3",q:"Según Pressman, la calidad del software es…",opts:["La ausencia total de errores","Concordancia con los requisitos funcionales/de rendimiento, los estándares documentados y las características implícitas esperadas","El número de líneas de código","La rapidez de ejecución"],c:1,e:"Definición de Pressman (1992)."},
+{t:8,u:"U3",q:"La base de las medidas de calidad son…",opts:["El número de programadores","Los requisitos del software","El presupuesto","Las horas trabajadas"],c:1,e:"Los requisitos (incluidos los implícitos, p. ej. un buen mantenimiento); su falta de concordancia es falta de calidad."},
+{t:8,u:"U3",q:"¿Cuál es un factor de «operaciones del producto» (características operativas)?",opts:["Portabilidad","Reusabilidad","Corrección, fiabilidad o eficiencia","Interoperabilidad"],c:2,e:"Operaciones: corrección, fiabilidad, eficiencia, integridad, facilidad de uso."},
+{t:8,u:"U3",q:"La portabilidad, la reusabilidad y la interoperabilidad pertenecen a la categoría de calidad…",opts:["Operaciones del producto","Revisión del producto","Transición del producto","No son factores de calidad"],c:2,e:"Transición del producto = adaptabilidad a nuevos entornos."},
+{t:8,u:"U3",q:"Una métrica de software es…",opts:["Una opinión subjetiva del jefe","Una medida cuantitativa del grado en que un sistema/componente/proceso cumple un atributo","El precio del software","El número de usuarios"],c:1,e:"Un KPI, además, es una métrica que predice el rendimiento de la empresa."},
+{t:8,u:"U3",q:"¿Cuál es una herramienta de análisis estático (caja blanca) de calidad del código?",opts:["JMeter","SONAR, PMD o Checkstyle","Trello","Nagios"],c:1,e:"SONAR, PMD, Checkstyle, Google CodePro, Simian: analizan sin ejecutar, viendo los fuentes."},
+// U4 Implantación
+{t:8,u:"U4",q:"La implantación es el proceso de…",opts:["Solo escribir el código","Verificar/instalar equipos, instalar la aplicación, construir los datos y entrenar a los usuarios","Solo diseñar la BBDD","Cerrar el proyecto"],c:1,e:"Equipos, aplicación, datos y formación de usuarios."},
+{t:8,u:"U4",q:"¿Cuál es una tarea de la instalación?",opts:["Programar las clases","Formar a los primeros usuarios y operadores y desarrollar planes de contingencia/recuperación/caída","Definir los requisitos","Diseñar el diagrama UML"],c:1,e:"Instalar HW/SW, formar, planes de contingencia, gestión de versiones, conversión de datos, ANS."},
+{t:8,u:"U4",q:"Al actualizar a producción una aplicación con BBDD ya instalada, se necesita…",opts:["Solo reinstalar el sistema operativo","Scripts que incluyan los cambios entre la versión anterior y la nueva","Borrar la base de datos","Nada especial"],c:1,e:"Scripts de actualización: añadir/borrar columnas, modificar datos, insertar/borrar filas."},
+{t:8,u:"U4",q:"Para que todo paso a producción sea reversible hay que proporcionar…",opts:["Solo un backup","Un mecanismo de copia de seguridad (backup) y uno de marcha atrás (rollback)","Solo el código fuente","Un manual de usuario"],c:1,e:"Backup + rollback; la copia debe englobar software modificado, configuración y BBDD."},
+{t:8,u:"U4",q:"La monitorización de una aplicación en producción controla parámetros como…",opts:["El número de empleados","Uso de CPU, memoria, disco y red","La rentabilidad comercial","Los requisitos del cliente"],c:1,e:"CPU, memoria, disco, red. Herramientas: Nagios, OSSIM, SNMP."},
+{t:8,u:"U4",q:"La virtualización de máquinas…",opts:["Dificulta las copias de seguridad","Facilita la redundancia, las copias de seguridad y la replicación de entornos","Impide el cloud computing","Solo sirve en desarrollo"],c:1,e:"Facilita redundancia, backups y replicación; relacionada con SaaS y cloud."},
+// U5 Mantenimiento
+{t:8,u:"U5",q:"¿Cuál es una tarea de la fase de mantenimiento?",opts:["Definir los requisitos iniciales","Implementar los cambios del sistema y asegurar que sigue cubriendo las necesidades de los usuarios","Redactar el contrato","Diseñar la arquitectura inicial"],c:1,e:"Implementar cambios, asegurar que sigue cubriendo necesidades y usar las revisiones post-instalación."},
+{t:8,u:"U5",q:"¿Cuál es un entregable del mantenimiento?",opts:["El acta de constitución","La traza detallada de los cambios realizados en el sistema","El diagrama de Gantt inicial","El presupuesto inicial"],c:1,e:"Entregables: fallos detectados, mejoras solicitadas, traza de cambios y actas de revisiones."},
+{t:8,u:"U5",q:"El documento de operación (para el equipo de operación) debe contener…",opts:["El plan de marketing","De qué ficheros consta, cómo se instala/configura, el mantenimiento, las copias de seguridad y la monitorización","Solo el manual de usuario","El currículum del equipo"],c:1,e:"Es la documentación técnica para el equipo de operación."},
+{t:8,u:"U5",q:"¿Por qué conviene que la empresa controle el código fuente de sus aplicaciones de negocio?",opts:["Para programar más rápido","Para no quedar atada a un solo proveedor de TI","Para reducir la calidad","Para evitar las pruebas"],c:1,e:"Sin el código fuente quedas atado a un proveedor; conviene un control de versiones bajo control de la empresa."},
+// U6 Manuales
+{t:8,u:"U6",q:"Sobre los manuales de usuario, es cierto que…",opts:["Son prescindibles","Son un entregable imprescindible y deben presupuestarse correctamente","No reducen las consultas al departamento técnico","Siempre son iguales para todos los usuarios"],c:1,e:"Imprescindibles, deben presupuestarse (documentar lleva más tiempo) y reducen las consultas."},
+{t:8,u:"U6",q:"Los manuales se suelen realizar en función de…",opts:["El tamaño del código","El perfil de usuario que los vaya a leer (administrador, usuario…)","El presupuesto del cliente","El número de pantallas"],c:1,e:"Según el perfil de usuario; o bien manual de uso rápido / avanzado."},
+{t:8,u:"U6",q:"¿Qué formato de manual facilita la integración con aplicaciones web pero dificulta mantener una copia impresa?",opts:["PDF","Papel","HTML","Word"],c:2,e:"HTML integra bien en web, pero dificulta una copia impresa idéntica."},
+{t:8,u:"U6",q:"¿Qué apartado del manual recoge la resolución de problemas frecuentes?",opts:["Glosario","Troubleshooting (FAQs)","Primeros pasos","Presentación del sistema"],c:1,e:"Troubleshooting = FAQs; el glosario recoge términos y abreviaturas."},
+// U7 Cierre
+{t:8,u:"U7",q:"Según PMBOK, el final de proyecto en que este se completa con éxito (se cumple la misión) es…",opts:["Extinción","Agregación","Inanición","Integración"],c:0,e:"Extinción = completado con éxito. Agregación = pasa a operaciones; Inanición = sin recursos; Integración = recursos a otros proyectos."},
+{t:8,u:"U7",q:"El tipo de cierre PMBOK en que el proyecto se queda sin recursos antes de completar los requisitos es…",opts:["Extinción","Agregación","Inanición","Integración"],c:2,e:"Inanición = se queda sin recursos."},
+{t:8,u:"U7",q:"¿Quién participa en el cierre administrativo?",opts:["Solo el cliente","Solo la empresa proveedora","El proveedor y el cliente","Solo los usuarios"],c:2,e:"Cierre administrativo = proveedor + cliente; el cierre interno = solo la proveedora."},
+{t:8,u:"U7",q:"El cierre del proyecto no puede realizarse sin que…",opts:["El cliente acepte el resultado (firma del documento de aceptación)","Se publique en prensa","Se despida al equipo","Se borren los datos"],c:0,e:"Con la firma del documento de aceptación el cliente reconoce recibir y probar los entregables; luego se factura."},
+{t:8,u:"U7",q:"El «análisis del cierre» (dentro del informe de cierre interno) comprende…",opts:["El plan de marketing","El estado del proyecto y los datos generales (duración/coste planificado vs real, retrasos, sobrecostes…)","El código fuente","El contrato inicial"],c:1,e:"Análisis del cierre = estado del proyecto + datos generales. Las desviaciones/causas/lecciones van en el «análisis de la gestión»."},
+{t:8,u:"U7",q:"El análisis de la gestión, en el cierre interno, incluye…",opts:["El desglose de costes por conceptos","Inventariar desviaciones, causas y acciones, y las lecciones aprendidas","El precio de venta por hora","Las oportunidades comerciales"],c:1,e:"Análisis de gestión = desviaciones/causas/acciones + lecciones aprendidas (actualizar la BD de proyectos)."},
+{t:8,u:"U7",q:"¿Qué se hace en el análisis comercial del cierre interno?",opts:["Calcular el beneficio","Identificar nuevas oportunidades comerciales nacidas del proyecto","Inventariar los fallos del sistema","Formar a los usuarios"],c:1,e:"Análisis comercial: nuevas oportunidades (mismo/nuevos clientes) y tendencia histórica por cliente."},
+
 /* ===== EXAMEN 2º PARCIAL (oficial) ===== */
 {t:"EX",u:"EX1",q:"1. La programación del proyecto hace referencia a:",opts:["El desarrollo del código fuente del programa","Definir las actividades, identificando relaciones y estimando duraciones aproximadas","Fijar inicio y fin estimados de cada actividad, asignar recursos y determinar holguras"],c:2,e:"Programar = el «cuándo»: fechas, recursos y holguras. La opción b describe la planificación."},
 {t:"EX",u:"EX1",q:"2. La parte de holgura que puede consumirse sin afectar al comienzo temprano de las actividades siguientes es la:",opts:["Holgura total de la actividad","Holgura libre de la actividad","Holgura independiente de la actividad"],c:1,e:"Holgura libre HL = ESj − (ESi + Tij): no afecta al comienzo temprano de la siguiente."},
@@ -203,7 +262,7 @@ const Q = [
 {t:"EX",u:"EX1",q:"4. Una de las principales ventajas de los diagramas de Gantt es que:",opts:["Permite evaluar y comparar diferentes alternativas de implementación","Permite determinar con antelación posibles puntos de conflicto","Permite una rápida comparación con el progreso actual de cada tarea"],c:2,e:"Ventaja del Gantt: visualizar y comparar con el progreso real. a y b son, de hecho, desventajas."},
 {t:"EX",u:"EX1",q:"5. Al utilizar herramientas automatizadas de gestión de proyectos:",opts:["Cualquier herramienta es válida, lo importante es automatizar","Su capacidad para generar gráficos e informes es un factor determinante","La potencia y flexibilidad de la herramienta no es determinante"],c:1,e:"La potencia, la flexibilidad y la capacidad de generar gráficos e informes sí son determinantes."},
 {t:"EX",u:"EX1",q:"6. Al asignar recursos a las actividades, hay que:",opts:["Asignar tareas sencillas a recursos sin experiencia","Asignar tareas cortas a recursos sin experiencia","Asignar tareas cortas a recursos con experiencia para mejorar la productividad"],c:0,e:"Equilibrio dificultad/experiencia: tareas sencillas → recursos con poca experiencia."},
-{t:"EX",u:"EX1",q:"7. Sobre la nivelación de recursos, es cierto que:",opts:["Una carga equilibrada suele producir la ejecución en el menor tiempo posible","La herramienta básica para comprobar la nivelación de un recurso es el histograma","El equilibrado de cargas busca no tener recursos ociosos ni sobrecargados"],c:2,e:"Equilibrar cargas = evitar ociosos y sobrecargados. La opción a es falsa (es un objetivo contradictorio con el menor tiempo)."},
+{t:"EX",u:"EX1",q:"7. Sobre la nivelación de recursos, es cierto que:",opts:["Una carga equilibrada suele producir la ejecución en el menor tiempo posible","La herramienta básica para comprobar la nivelación de un recurso es el histograma","El equilibrado de cargas busca no tener recursos ociosos ni sobrecargados"],c:2,e:"Equilibrar cargas = evitar ociosos y sobrecargados. La opción a es falsa (objetivo contradictorio con el menor tiempo)."},
 {t:"EX",u:"EX1",q:"8. El documento que identifica para cada tarea sus fechas de inicio y fin, relaciones y recursos asignados es:",opts:["Plan de trabajo","Histograma","Plan de recursos"],c:0,e:"Plan de trabajo (óptica de las tareas)."},
 {t:"EX",u:"EX1",q:"9. El objetivo básico de los procesos de control del proyecto es:",opts:["Hacer que la realidad se ajuste a la planificación prevista","Conocer y entender desviaciones para corregirlas (tareas, alcance y/o planificación) y aprender para mejorar estimaciones futuras","Ir modificando la planificación para ajustarla a la realidad"],c:1,e:"Detectar y entender desviaciones, corregir y aprender. a y c son acciones parciales."},
 {t:"EX",u:"EX1",q:"10. El dato de porcentaje completado de cada tarea:",opts:["Es un dato subjetivo y de difícil medición exacta","Es totalmente objetivo (horas empleadas/horas previstas)","No se suele usar por ser imposible de estimar"],c:0,e:"El % completado tiene un fuerte componente subjetivo."},
@@ -224,12 +283,12 @@ const Q = [
 {t:"EX",u:"EX1",q:"25. Si, antes de la entrega, el cliente pide cambios que afectan a los requisitos:",opts:["Siempre deben incluirse en el alcance porque no se ha entregado","Se analizan y presupuestan, y luego se decide si hacerlos y cuándo","Si provocan retraso, siempre van a una segunda fase"],c:1,e:"Los cambios se analizan, presupuestan y planifican; después se decide."},
 {t:"EX",u:"EX1",q:"26. Sobre la gestión de riesgos:",opts:["Con un equipo previsor los proyectos llegan a ejecutarse sin riesgos","Con un equipo previsor los riesgos serán menores, pero no pueden eliminarse por completo","El impacto de los riesgos no se reduce aunque se gestionen"],c:1,e:"Los riesgos se reducen, pero no se eliminan del todo."},
 {t:"EX",u:"EX1",q:"27. Sobre las metodologías de gestión de riesgos:",opts:["Se basan en identificación, análisis, priorización y toma de medidas","Solo se centran en riesgos negativos","Solo consideran la probabilidad, no el impacto"],c:0,e:"Metodología: identificar → analizar → priorizar → tomar medidas (PMBOK incluye también riesgos positivos)."},
-{t:"EX",u:"EX1",q:"28. Verificar entradas y salidas de un componente sin importar su estructura interna es un enfoque de:",opts:["Caja blanca","Caja negra","Top-down (de arriba abajo)"],c:1,e:"Caja negra: solo entradas/salidas, sin mirar el código interno."},
-{t:"EX",u:"EX1",q:"29. Las pruebas de regresión sirven para:",opts:["Verificar funcionalidad y estructura de cada componente codificado","Verificar el comportamiento con los datos del entorno de producción","Evitar que un cambio posterior en un módulo afecte erróneamente a otros"],c:2,e:"Regresión = comprobar que un cambio no rompe el funcionamiento de otros módulos."},
-{t:"EX",u:"EX1",q:"30. La calidad de un sistema software:",opts:["Es a menudo subjetiva y depende del contexto y del objetivo","Es totalmente objetiva y evaluable con herramientas automatizadas","Su automatización es un problema sin apenas soluciones disponibles"],c:0,e:"La calidad es en muchos casos subjetiva y dependiente del contexto."},
-{t:"EX",u:"EX1",q:"31. En el cierre, la principal causa de que un cliente niegue su conformidad y el pago suele ser:",opts:["La aplicación no cumple expectativas por requisitos no especificados o ambiguos","El presupuesto es demasiado alto","El plazo de entrega se ha demorado"],c:0,e:"Insatisfacción por requisitos no especificados o ambiguos."},
-{t:"EX",u:"EX1",q:"32. En el cierre INTERNO del proyecto participa:",opts:["La empresa desarrolladora de la aplicación","La empresa cliente","Tanto la desarrolladora como el cliente"],c:0,e:"Cierre interno → solo la empresa desarrolladora."},
-{t:"EX",u:"EX1",q:"33. En el cierre interno, el análisis de cierre del proyecto comprende:",opts:["Datos generales (duración, costes por fases, retrasos, sobrecostes, cumplimiento)","Rentabilidad del proyecto","Análisis de desviaciones, causas y acciones correctoras, y lecciones aprendidas"],c:2,e:"Análisis interno = desviaciones, causas, acciones correctoras y lecciones aprendidas.",w:"⚠ Según la pregunta 50, el cierre interno también incluye los datos generales (opción a). Si el enunciado original admite varias, podría aceptarse a; contrástalo con el profesor."},
+{t:"EX",u:"EX1",q:"28. Verificar entradas y salidas de un componente sin importar su estructura interna es un enfoque de:",opts:["Caja blanca","Caja negra","Top-down (de arriba abajo)"],c:1,e:"Caja negra: solo entradas/salidas, sin mirar el código interno. (Confirmado con el Tema 08.)"},
+{t:"EX",u:"EX1",q:"29. Las pruebas de regresión sirven para:",opts:["Verificar funcionalidad y estructura de cada componente codificado","Verificar el comportamiento con los datos del entorno de producción","Evitar que un cambio posterior en un módulo afecte erróneamente a otros"],c:2,e:"Regresión = evitar el «efecto onda». (Confirmado con el Tema 08.)"},
+{t:"EX",u:"EX1",q:"30. La calidad de un sistema software:",opts:["Es a menudo subjetiva y depende del contexto y del objetivo","Es totalmente objetiva y evaluable con herramientas automatizadas","Su automatización es un problema sin apenas soluciones disponibles"],c:0,e:"La calidad es en muchos casos subjetiva y dependiente del contexto (Pressman / Tema 08)."},
+{t:"EX",u:"EX1",q:"31. En el cierre, la principal causa de que un cliente niegue su conformidad y el pago suele ser:",opts:["La aplicación no cumple expectativas por requisitos no especificados o ambiguos","El presupuesto es demasiado alto","El plazo de entrega se ha demorado"],c:0,e:"Insatisfacción por requisitos no especificados o ambiguos (Tema 08, Aceptación)."},
+{t:"EX",u:"EX1",q:"32. En el cierre INTERNO del proyecto participa:",opts:["La empresa desarrolladora de la aplicación","La empresa cliente","Tanto la desarrolladora como el cliente"],c:0,e:"Cierre interno → solo la empresa proveedora/desarrolladora (Tema 08)."},
+{t:"EX",u:"EX1",q:"33. En el cierre interno, el «análisis del cierre» comprende:",opts:["Los datos generales (duración, costes por fases, retrasos, sobrecostes, cumplimiento)","Rentabilidad del proyecto","Análisis de desviaciones, causas y acciones correctoras, y lecciones aprendidas"],c:0,e:"Según el Tema 08, el «Análisis del cierre» = estado del proyecto + datos generales. La rentabilidad va en el «análisis económico» y las desviaciones/lecciones en el «análisis de la gestión».",w:"Corregido tras revisar el Tema 08 (antes marcada como c). Ojo: la pregunta 50, sobre el «análisis del proyecto» completo, sí incluye los datos generales Y las desviaciones/lecciones (→ ambas)."},
 {t:"EX",u:"EX1",q:"34. El comienzo más temprano (Early Start) de un evento se representa por convención mediante:",opts:["Un triángulo","Un cuadrado","Un círculo"],c:0,e:"ES → triángulo; LS → cuadrado."},
 {t:"EX",u:"EX1",q:"35. Para un evento, se cumple que:",opts:["Su comienzo más temprano y su final más temprano coinciden en el tiempo","Su comienzo más temprano siempre es menor que su final más temprano","Su comienzo más temprano siempre es mayor que su final más temprano"],c:0,e:"Los eventos no tienen duración: comienzo y final coinciden."},
 {t:"EX",u:"EX1",q:"36. Una de las principales desventajas de los diagramas de Gantt es que:",opts:["En proyectos largos y complejos es poco aplicable","Es lento de poner en marcha","Supone un desembolso económico importante"],c:0,e:"Poco aplicable en proyectos largos y complejos (muchas actividades)."},
@@ -239,36 +298,36 @@ const Q = [
 {t:"EX",u:"EX1",q:"40. Si PV < EV y AC > EV, entonces:",opts:["Adelanto en el cronograma y por debajo del presupuesto","Retraso en el cronograma y sobrecoste","Adelanto en el cronograma y sobrecoste"],c:2,e:"EV>PV → adelanto; AC>EV → sobrecoste."},
 {t:"EX",u:"EX1",q:"41. El control de cambios del proyecto:",opts:["Siempre es preventivo y se vincula a la gestión del riesgo","Siempre es correctivo: corrige los problemas una vez ocurren","Puede realizarse antes, durante o después de cada uno de los procesos"],c:2,e:"El control de cambios puede aplicarse antes, durante o después de los procesos."},
 {t:"EX",u:"EX1",q:"42. Sobre los riesgos en un sistema software, ¿qué afirmación NO es correcta?",opts:["Son independientes del contexto y del objetivo que se pretende","La nula gestión del conocimiento en empresas TIC contribuye a su aparición","Los escasos periodos de pruebas contribuyen a su aparición"],c:0,e:"NO es correcta: los riesgos dependen del contexto y del objetivo."},
-{t:"EX",u:"EX1",q:"43. Las pruebas que verifican funcionalidad y estructura de cada componente una vez codificado se denominan:",opts:["Pruebas de aceptación","Pruebas de regresión","Pruebas unitarias"],c:2,e:"Pruebas unitarias (por componente codificado)."},
+{t:"EX",u:"EX1",q:"43. Las pruebas que verifican funcionalidad y estructura de cada componente una vez codificado se denominan:",opts:["Pruebas de aceptación","Pruebas de regresión","Pruebas unitarias"],c:2,e:"Pruebas unitarias (por componente codificado). Confirmado con el Tema 08."},
 {t:"EX",u:"EX1",q:"44. Verificar la estructura interna de un componente (no su funcionalidad) es un enfoque de:",opts:["Caja blanca","Caja negra","Bottom-up (de abajo arriba)"],c:0,e:"Caja blanca: se inspecciona la estructura interna/código."},
-{t:"EX",u:"EX1",q:"45. Las pruebas de software sirven para comprobar:",opts:["Que el componente se ensambla bien con los demás","Que las interfaces con otros sistemas son correctas","Las dos son verdaderas"],c:2,e:"Comprueban ensamblaje e interfaces con otros sistemas."},
-{t:"EX",u:"EX1",q:"46. Un elemento fundamental que determina la calidad de un producto software es:",opts:["Su flexibilidad","Su fiabilidad","Las dos son verdaderas"],c:2,e:"Flexibilidad y fiabilidad son ambas factores de calidad."},
-{t:"EX",u:"EX1",q:"47. Al pasar a producción una nueva versión con base de datos instalada, se debe proporcionar:",opts:["Una copia de seguridad previa","Copia de seguridad previa y un script de actualización","Copia de seguridad previa, script de actualización y un mecanismo de marcha atrás"],c:2,e:"Backup + script de actualización + mecanismo de rollback (marcha atrás)."},
-{t:"EX",u:"EX1",q:"48. NO es tarea fundamental de la fase de mantenimiento:",opts:["Asegurar que el sistema sigue solucionando las necesidades de los usuarios","Entregar la traza detallada de los cambios realizados en el sistema","Identificar los riesgos que afectan al sistema"],c:1,e:"Entregar la traza detallada de los cambios no es una tarea fundamental del mantenimiento; a y c sí lo son."},
-{t:"EX",u:"EX1",q:"49. Sobre los manuales de usuario:",opts:["No deben presupuestarse; se hacen siempre y el cliente los da por incluidos","Se suelen realizar en función del perfil de usuario que los va a leer","Las dos son verdaderas"],c:1,e:"Se hacen según el perfil del usuario; además deben presupuestarse (la opción a es falsa)."},
-{t:"EX",u:"EX1",q:"50. En el cierre interno, el análisis del proyecto debe comprender:",opts:["Datos generales (duración y costes por fases, retrasos, sobrecostes, cumplimiento)","Análisis de desviaciones, causas, acciones correctoras y lecciones aprendidas","Las dos anteriores"],c:2,e:"Comprende tanto los datos generales como el análisis de desviaciones y lecciones aprendidas."},
+{t:"EX",u:"EX1",q:"45. Las pruebas de software sirven para comprobar:",opts:["Que el componente se ensambla bien con los demás","Que las interfaces con otros sistemas son correctas","Las dos son verdaderas"],c:2,e:"Comprueban ensamblaje e interfaces con otros sistemas (Tema 08)."},
+{t:"EX",u:"EX1",q:"46. Un elemento fundamental que determina la calidad de un producto software es:",opts:["Su flexibilidad","Su fiabilidad","Las dos son verdaderas"],c:2,e:"Flexibilidad y fiabilidad son ambas factores de calidad (Tema 08, factores de McCall)."},
+{t:"EX",u:"EX1",q:"47. Al pasar a producción una nueva versión con base de datos instalada, se debe proporcionar:",opts:["Una copia de seguridad previa","Copia de seguridad previa y un script de actualización","Copia de seguridad previa, script de actualización y un mecanismo de marcha atrás"],c:2,e:"Backup + script de actualización + mecanismo de rollback (marcha atrás). Confirmado con el Tema 08."},
+{t:"EX",u:"EX1",q:"48. NO es tarea fundamental de la fase de mantenimiento:",opts:["Asegurarse de que el sistema continúa solucionando las necesidades de los usuarios","Entregar la traza detallada de los cambios realizados en el sistema","Identificar los riesgos que afectan al sistema"],c:2,e:"Según el Tema 08, NO es tarea del mantenimiento «identificar los riesgos». Las tareas/entregables del mantenimiento son: implementar cambios, asegurar que sigue cubriendo necesidades (a), el listado de fallos y mejoras, la traza detallada de los cambios (b) y las actas de revisiones.",w:"Corregido tras revisar el Tema 08 (antes marcada como b). La «traza detallada de los cambios» SÍ es un entregable del mantenimiento, así que la que NO corresponde es identificar riesgos (c)."},
+{t:"EX",u:"EX1",q:"49. Sobre los manuales de usuario:",opts:["No deben presupuestarse; se hacen siempre y el cliente los da por incluidos","Se suelen realizar en función del perfil de usuario que los va a leer","Las dos son verdaderas"],c:1,e:"Se hacen según el perfil del usuario; además deben presupuestarse (la opción a es falsa). Tema 08."},
+{t:"EX",u:"EX1",q:"50. En el cierre interno, el «análisis del proyecto» debe comprender:",opts:["Datos generales (duración y costes por fases, retrasos, sobrecostes, cumplimiento)","Análisis de desviaciones, causas, acciones correctoras y lecciones aprendidas","Las dos anteriores"],c:2,e:"El análisis del proyecto (informe de cierre) comprende tanto los datos generales (análisis del cierre) como el análisis de desviaciones y lecciones (análisis de la gestión)."},
 {t:"EX",u:"EX1",q:"51. Dentro del proceso de planificación, la programación suele realizarse:",opts:["Inmediatamente tras el desglose de tareas y recursos","Tras el desglose de tareas y recursos y la ordenación temporal (lógica) de las tareas","Tras la elaboración del presupuesto"],c:1,e:"Etapas: desglose → ordenación/organización → programación → presupuesto."},
 {t:"EX",u:"EX1",q:"52. La holgura disponible tras realizar la actividad si todas las predecesoras empezaron en su LS es la:",opts:["Holgura total de la actividad","Holgura libre de la actividad","Holgura independiente de la actividad"],c:2,e:"Holgura independiente HI = ESj − (LSi + Tij)."},
 {t:"EX",u:"EX1",q:"53. Respecto al camino crítico podemos decir:",opts:["Todas las tareas con holgura 0 pertenecen al camino crítico","El camino crítico en un grafo no es único","Las dos son verdaderas"],c:1,e:"El camino crítico no es único (puede haber varios). Tener holgura 0 no garantiza pertenecer a él."},
 {t:"EX",u:"EX1",q:"54. Una de las principales desventajas de los diagramas de Gantt es que:",opts:["Es complicado de entender","No permite integrar planificación y programación en un único gráfico","Tiende a desactualizarse rápidamente"],c:2,e:"Tiende a desactualizarse rápidamente."},
 {t:"EX",u:"EX1",q:"55. Con recursos limitados que asignar a varias actividades, se recomienda:",opts:["Asignarlos proporcionalmente a todas las tareas según su duración","Asignarlos primero a las tareas del camino crítico","Asignarlos primero a las tareas más grandes"],c:1,e:"Primero a las tareas del camino crítico (sus desviaciones afectan al proyecto)."},
 {t:"EX",u:"EX1",q:"56. La diferencia principal entre el plan de trabajo y el plan de recursos es que:",opts:["El plan de trabajo recoge la programación desde las tareas y el otro desde los recursos","Son el mismo documento","El de trabajo se entrega en la oferta y el de recursos al terminar"],c:0,e:"Plan de trabajo = óptica de las tareas; plan de recursos = óptica de los recursos."},
-{t:"EX",u:"EX1",q:"57. Para el control de avance se necesitan los planes de ejecución, la medición del avance y:",opts:["La definición de los perfiles de los miembros del equipo","La documentación del ciclo de vida elegido, para controlar su cumplimiento","Los objetivos del proyecto, para comparar con la situación actual"],c:2,e:"Controlar = comparar lo real con lo planificado y con los objetivos.",w:"⚠ La pregunta aparece truncada en el original; conviene verificarla."},
+{t:"EX",u:"EX1",q:"57. Para el control de avance se necesitan los planes de ejecución, la medición del avance y:",opts:["La definición de los perfiles de los miembros del equipo","La documentación del ciclo de vida elegido, para controlar su cumplimiento","Los objetivos del proyecto, para comparar con la situación actual"],c:2,e:"Controlar = comparar lo real con lo planificado y con los objetivos.",w:"La pregunta aparece truncada en el original; conviene verificarla."},
 {t:"EX",u:"EX1",q:"58. En los procesos de control, los criterios de control:",opts:["Siempre se reducen a tiempos y costes","Incluyen tiempos y costes, y también objetivos, cambios, calidad y riesgos","Siempre se reducen a calidad y riesgos"],c:1,e:"Tiempos y costes, y además objetivos, cambios al objetivo, calidad y riesgos."},
 {t:"EX",u:"EX1",q:"59. ¿Qué técnica permite identificar de forma visual el estado real de cada tarea frente a lo planificado?",opts:["El valor ganado del proyecto","El histograma","Los diagramas de barras comparativos sobre un Gantt"],c:2,e:"Diagramas de barras comparativos (real vs planificado) sobre el Gantt."},
-{t:"EX",u:"EX1",q:"60. Sobre el porcentaje en que cada tarea se encuentra completada:",opts:["Solo pueden considerarse los valores 0 % y 100 %","Se definen pasos/hitos intermedios y el avance será el % de hitos completados","Se utiliza el ratio horas realizadas / horas estimadas"],c:1,e:"Para evitar el % subjetivo se definen hitos intermedios (avance = % de hitos completados).",w:"⚠ Enunciado truncado en el original; conviene verificarlo."},
-{t:"EX",u:"EX1",q:"61. La herramienta que muestra el nivel de costes incurridos en cada periodo se denomina:",opts:["Línea de presupuesto","Línea de coste (línea base de coste, costes por periodo)","Curva de la S"],c:1,e:"Costes por periodo = línea base de coste.",w:"⚠ Enunciado truncado. Si se refiere a costes ACUMULADOS, la respuesta sería la curva de la S (c)."},
+{t:"EX",u:"EX1",q:"60. Sobre el porcentaje en que cada tarea se encuentra completada:",opts:["Solo pueden considerarse los valores 0 % y 100 %","Se definen pasos/hitos intermedios y el avance será el % de hitos completados","Se utiliza el ratio horas realizadas / horas estimadas"],c:1,e:"Para evitar el % subjetivo se definen hitos intermedios (avance = % de hitos completados).",w:"Enunciado truncado en el original; conviene verificarlo."},
+{t:"EX",u:"EX1",q:"61. La herramienta que muestra el nivel de costes incurridos en cada periodo se denomina:",opts:["Línea de presupuesto","Línea de coste (línea base de coste, costes por periodo)","Curva de la S"],c:1,e:"Costes por periodo = línea base de coste.",w:"Enunciado truncado. Si se refiere a costes ACUMULADOS, la respuesta sería la curva de la S (c)."},
 {t:"EX",u:"EX1",q:"62. El % de avance físico, para su presentación, se expresa en función de:",opts:["Siempre el coste incurrido","Siempre el tiempo de ejecución","Puede ser el coste, el tiempo o las horas/hombre consumidas"],c:2,e:"El avance físico puede expresarse en función del coste, el tiempo o las horas/hombre."},
 {t:"EX",u:"EX1",q:"63. Si se opta por un plan para identificar riesgos y evitar que se conviertan en problemas, se habla de:",opts:["Control de crisis","Mitigación de riesgos","Prevención de riesgos"],c:2,e:"Prevención: plan para identificar y evitar que los riesgos se conviertan en problemas."},
 {t:"EX",u:"EX1",q:"64. En la gestión de riesgos:",opts:["Se incluye análisis cuantitativo pero no cualitativo","Durante la planificación es necesario definir la metodología a seguir","El seguimiento solo se hace cuando ya ha aparecido un riesgo"],c:1,e:"La planificación de riesgos define la metodología (e incluye análisis cualitativo y cuantitativo, y seguimiento continuo)."},
-{t:"EX",u:"EX1",q:"65. ¿Cuál NO es propiamente una técnica de identificación del riesgo?",opts:["Árboles de decisión","Análisis DAFO","Listas de chequeo y cobertura"],c:0,e:"Los árboles de decisión son técnica de análisis/proyección, no de identificación."},
-{t:"EX",u:"EX1",q:"66. La cobertura de un juego de pruebas se define como:",opts:["El coste máximo asumible para las pruebas","El porcentaje del código de la aplicación que cubre el grupo de pruebas","El intervalo de tiempo destinado a las pruebas"],c:1,e:"Cobertura = % del código cubierto por las pruebas."},
-{t:"EX",u:"EX1",q:"67. Las pruebas de carga de un nuevo módulo en una empresa en funcionamiento se hacen sobre el entorno de:",opts:["Desarrollo","Preproducción o integración","Producción"],c:1,e:"Las pruebas de carga se hacen en preproducción/integración, no en producción."},
-{t:"EX",u:"EX1",q:"68. Un elemento fundamental que determina la calidad de un producto software es:",opts:["Su rentabilidad","Su automatización","Las dos son verdaderas"],c:-1,e:"Determinantes de la calidad son factores como la fiabilidad y la flexibilidad (ver pregunta 46).",w:"⚠ La pregunta parece tener una errata: ni la rentabilidad ni la automatización determinan la calidad del software. Verifícala con el profesor."},
-{t:"EX",u:"EX1",q:"69. El proceso de implantación y puesta en marcha de un desarrollo:",opts:["Consiste únicamente en instalar la aplicación para los usuarios","Incluye la formación y entrenamiento de usuarios y operadores","No incluye los procedimientos de mantenimiento ni de recuperación ante caídas"],c:1,e:"La implantación incluye formación y entrenamiento de usuarios y operadores."},
-{t:"EX",u:"EX1",q:"70. Elaborar el documento que describe las operaciones de mantenimiento (seguridad, recuperación ante desastres…) es responsabilidad de:",opts:["La empresa desarrolladora de la aplicación","Los administradores de sistemas de la empresa cliente","Los usuarios"],c:0,e:"La elaboración de esa documentación corresponde a la empresa desarrolladora."},
-{t:"EX",u:"EX1",q:"71. Sobre los manuales de usuario:",opts:["Aumentan el nivel de consultas del cliente al departamento técnico","Deben presupuestarse, pues documentar suele llevar más tiempo del esperado","Son un entregable prescindible"],c:1,e:"Deben presupuestarse correctamente: escribir documentación lleva más tiempo del previsto."},
-{t:"EX",u:"EX1",q:"72. En el cierre ADMINISTRATIVO (el primero) participa:",opts:["La empresa desarrolladora de la aplicación","La empresa cliente","Tanto la desarrolladora como el cliente"],c:2,e:"El cierre administrativo implica a ambas partes (desarrolladora y cliente)."}
+{t:"EX",u:"EX1",q:"65. ¿Cuál NO es propiamente una técnica de identificación del riesgo?",opts:["Árboles de decisión","Análisis DAFO","Listas de chequeo y cobertura"],c:0,e:"Los árboles de decisión son técnica de análisis/proyección, no de identificación (DAFO y listas de chequeo sí)."},
+{t:"EX",u:"EX1",q:"66. La cobertura de un juego de pruebas se define como:",opts:["El coste máximo asumible para las pruebas","El porcentaje del código de la aplicación que cubre el grupo de pruebas","El intervalo de tiempo destinado a las pruebas"],c:1,e:"Cobertura = % del código cubierto por las pruebas (Tema 08)."},
+{t:"EX",u:"EX1",q:"67. Las pruebas de carga de un nuevo módulo en una empresa en funcionamiento se hacen sobre el entorno de:",opts:["Desarrollo","Preproducción o integración","Producción"],c:1,e:"Las pruebas de carga se hacen en preproducción/integración, no en producción (Tema 08)."},
+{t:"EX",u:"EX1",q:"68. Un elemento fundamental que determina la calidad de un producto software es:",opts:["Su rentabilidad","Su automatización","Las dos son verdaderas"],c:-1,e:"Los factores de calidad del Tema 08 son la fiabilidad, la flexibilidad, la corrección, la eficiencia, etc. (ver pregunta 46).",w:"La pregunta parece tener una errata: ni la rentabilidad ni la automatización determinan la calidad del software. Confirmado tras revisar el Tema 08. Verifícala con el profesor."},
+{t:"EX",u:"EX1",q:"69. El proceso de implantación y puesta en marcha de un desarrollo:",opts:["Consiste únicamente en instalar la aplicación para los usuarios","Incluye la formación y entrenamiento de usuarios y operadores","No incluye los procedimientos de mantenimiento ni de recuperación ante caídas"],c:1,e:"La implantación incluye formación y entrenamiento de usuarios y operadores (Tema 08)."},
+{t:"EX",u:"EX1",q:"70. Elaborar el documento que describe las operaciones de mantenimiento (seguridad, recuperación ante desastres…) es responsabilidad de:",opts:["La empresa desarrolladora de la aplicación","Los administradores de sistemas de la empresa cliente","Los usuarios"],c:0,e:"La elaboración del documento de operación corresponde a la empresa desarrolladora (Tema 08)."},
+{t:"EX",u:"EX1",q:"71. Sobre los manuales de usuario:",opts:["Aumentan el nivel de consultas del cliente al departamento técnico","Deben presupuestarse, pues documentar suele llevar más tiempo del esperado","Son un entregable prescindible"],c:1,e:"Deben presupuestarse correctamente; además reducen (no aumentan) las consultas y son imprescindibles (Tema 08)."},
+{t:"EX",u:"EX1",q:"72. En el cierre ADMINISTRATIVO (el primero) participa:",opts:["La empresa desarrolladora de la aplicación","La empresa cliente","Tanto la desarrolladora como el cliente"],c:2,e:"El cierre administrativo implica a ambas partes: proveedor + cliente (Tema 08)."}
 ];
 
 const state = { filter:"all", answered:{}, correct:{} };
@@ -277,11 +336,11 @@ const quizEl=document.getElementById("quiz");
 
 function buildQuiz(){
   quizEl.innerHTML=""; let idx=0;
-  [6,7,"EX"].forEach(t=>{
+  [6,7,8,"EX"].forEach(t=>{
     const U=UNITS[t];
     const temaQs=Q.map((q,i)=>({q,i})).filter(o=>String(o.q.t)===String(t));
     const wrap=document.createElement("section");
-    wrap.className="tema-block "+(t===7?"t7scope":(t==="EX"?"exscope":""));
+    wrap.className="tema-block "+(t===7?"t7scope":(t===8?"t8scope":(t==="EX"?"exscope":"")));
     wrap.dataset.tema=String(t);
     const h=document.createElement("div"); h.className="tema-h "+U.cls; h.textContent=U.title; wrap.appendChild(h);
     if(U.note){const n=document.createElement("div");n.className="tema-note";n.textContent=U.note;wrap.appendChild(n);}
@@ -298,7 +357,7 @@ function buildQuiz(){
 
 function card(q,i,number,t){
   const c=document.createElement("div"); c.className="q"; c.dataset.qi=i;
-  const accent = t===6?"var(--blue)":(t===7?"var(--green)":"var(--violet)");
+  const accent = t===6?"var(--blue)":(t===7?"var(--green)":(t===8?"var(--orange)":"var(--violet)"));
   const label = t==="EX" ? "" : '<div class="num" style="color:'+accent+'">Pregunta '+number+'</div>';
   c.innerHTML=label+'<div class="prompt">'+q.q+'</div>';
   const opts=document.createElement("div"); opts.className="opts";
@@ -316,7 +375,7 @@ function card(q,i,number,t){
 function choose(card,q,i,oi){
   if(state.answered[i]!==undefined) return;
   state.answered[i]=oi;
-  const review = q.c<0;            // pregunta marcada a revisar (errata)
+  const review = q.c<0;
   const right = !review && oi===q.c;
   state.correct[i]=right;
   const btns=card.querySelectorAll(".opt");
